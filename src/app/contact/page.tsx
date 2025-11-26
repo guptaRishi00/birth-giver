@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import CTASection from "@/components/CTASection";
+import { FaArrowRight, FaPaperPlane } from "react-icons/fa";
 
-// Accept 'cta' data as a prop
 export default function ContactPage({ cta }: { cta: any }) {
   const [form, setForm] = useState({
     name: "",
@@ -12,9 +12,11 @@ export default function ContactPage({ cta }: { cta: any }) {
     phone: "",
     message: "",
   });
+
   const [status, setStatus] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
+  const [activeField, setActiveField] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -31,8 +33,7 @@ export default function ContactPage({ cta }: { cta: any }) {
     }
     try {
       setStatus("submitting");
-      // Mock submission - replace with actual API call if needed
-      await new Promise((r) => setTimeout(r, 800));
+      await new Promise((r) => setTimeout(r, 1500));
       setStatus("success");
       setForm({ name: "", email: "", phone: "", message: "" });
     } catch {
@@ -41,139 +42,220 @@ export default function ContactPage({ cta }: { cta: any }) {
   };
 
   return (
-    <div className="w-full px-4 md:px-20 py-16">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-bold mb-8">Contact Us</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white border border-gray-200 rounded-xl p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">
-              Call Us
-            </h2>
-            <Link
-              href="tel:+447776842718"
-              className="text-red-600 font-medium hover:text-red-700"
-            >
-              +44 7776 842718
-            </Link>
+    <main className="bg-white min-h-screen text-black selection:bg-red-600 selection:text-white">
+      {/* Split Layout Container */}
+      <div className="w-full max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+        {/* LEFT COLUMN: Sticky Info & Branding */}
+        <div className="relative p-6 md:p-12 lg:p-24 flex flex-col justify-between h-fit lg:h-screen lg:sticky lg:top-0 border-r border-gray-100">
+          {/* Header */}
+          <div className="space-y-8">
+            <div className="w-12 h-1 bg-red-600"></div>{" "}
+            {/* Brand Accent Line */}
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.9]">
+              Let's build <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-500">
+                something bold.
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-500 max-w-md font-medium leading-relaxed">
+              Ready to transform your digital presence? We are currently
+              accepting new partnerships.
+            </p>
           </div>
 
-          <div className="bg-white border border-gray-200 rounded-xl p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">
-              Email Us
-            </h2>
-            <Link
-              href="mailto:bgfp@birthgiverfilmproduction.com"
-              className="text-red-600 font-medium hover:text-red-700 break-all"
-            >
-              bgfp@birthgiverfilmproduction.com
-            </Link>
+          {/* Contact Details */}
+          <div className="mt-16 lg:mt-0 space-y-12">
+            <div>
+              <label className="block text-xs font-bold uppercase tracking-widest text-red-600 mb-4">
+                Direct Inquiry
+              </label>
+              <Link
+                href="mailto:bgfp@birthgiverfilmproduction.com"
+                className="block text-xl md:text-3xl font-bold hover:text-red-600 transition-colors duration-300 break-all leading-tight"
+              >
+                bgfp@birthgiverfilmproduction.com
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="group cursor-pointer">
+                <label className="block text-xs font-bold uppercase tracking-widest text-red-600 mb-2">
+                  Studio
+                </label>
+                <p className="text-lg font-medium text-gray-900 group-hover:translate-x-2 transition-transform duration-300">
+                  London, UK
+                  <br />
+                  Canary Wharf, E14
+                </p>
+              </div>
+              <div className="group">
+                <label className="block text-xs font-bold uppercase tracking-widest text-red-600 mb-2">
+                  Call Us
+                </label>
+                <Link
+                  href="tel:+447776842718"
+                  className="text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
+                >
+                  +44 7776 842718
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-10 bg-white border border-gray-200 rounded-xl p-6 md:p-8">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">
-            Send us a message
-          </h2>
+        {/* RIGHT COLUMN: The Interactive Form */}
+        <div className="p-6 md:p-12 lg:p-24 flex flex-col justify-center bg-white">
           <form
             onSubmit={handleSubmit}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="space-y-16 max-w-xl mx-auto w-full pt-12 lg:pt-0"
           >
-            <div className="col-span-1">
+            {/* Input Field: Name */}
+            <div
+              className={`relative border-b-2 transition-colors duration-500 ${
+                activeField === "name" ? "border-red-600" : "border-gray-200"
+              }`}
+            >
               <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="name"
+                className={`absolute left-0 transition-all duration-300 pointer-events-none font-bold uppercase text-xs tracking-widest ${
+                  activeField === "name" || form.name
+                    ? "-top-6 text-red-600"
+                    : "top-4 text-gray-400"
+                }`}
               >
-                Name
+                01 / Name
               </label>
               <input
-                id="name"
-                name="name"
                 type="text"
+                name="name"
                 value={form.name}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                placeholder="Your full name"
+                onFocus={() => setActiveField("name")}
+                onBlur={() => setActiveField(null)}
+                className="w-full bg-transparent py-4 text-2xl md:text-4xl font-bold text-black focus:outline-none placeholder-transparent"
+                placeholder="Name"
                 required
               />
             </div>
-            <div className="col-span-1">
+
+            {/* Input Field: Email */}
+            <div
+              className={`relative border-b-2 transition-colors duration-500 ${
+                activeField === "email" ? "border-red-600" : "border-gray-200"
+              }`}
+            >
               <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="email"
+                className={`absolute left-0 transition-all duration-300 pointer-events-none font-bold uppercase text-xs tracking-widest ${
+                  activeField === "email" || form.email
+                    ? "-top-6 text-red-600"
+                    : "top-4 text-gray-400"
+                }`}
               >
-                Email
+                02 / Email
               </label>
               <input
-                id="email"
-                name="email"
                 type="email"
+                name="email"
                 value={form.email}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                placeholder="you@example.com"
+                onFocus={() => setActiveField("email")}
+                onBlur={() => setActiveField(null)}
+                className="w-full bg-transparent py-4 text-2xl md:text-4xl font-bold text-black focus:outline-none placeholder-transparent"
+                placeholder="Email"
                 required
               />
             </div>
-            <div className="col-span-1 md:col-span-2">
+
+            {/* Input Field: Phone */}
+            <div
+              className={`relative border-b-2 transition-colors duration-500 ${
+                activeField === "phone" ? "border-red-600" : "border-gray-200"
+              }`}
+            >
               <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="phone"
+                className={`absolute left-0 transition-all duration-300 pointer-events-none font-bold uppercase text-xs tracking-widest ${
+                  activeField === "phone" || form.phone
+                    ? "-top-6 text-red-600"
+                    : "top-4 text-gray-400"
+                }`}
               >
-                Phone (optional)
+                03 / Phone (Optional)
               </label>
               <input
-                id="phone"
-                name="phone"
                 type="tel"
+                name="phone"
                 value={form.phone}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                placeholder="+44 ..."
+                onFocus={() => setActiveField("phone")}
+                onBlur={() => setActiveField(null)}
+                className="w-full bg-transparent py-4 text-2xl md:text-4xl font-bold text-black focus:outline-none placeholder-transparent"
+                placeholder="Phone"
               />
             </div>
-            <div className="col-span-1 md:col-span-2">
+
+            {/* Input Field: Message */}
+            <div
+              className={`relative border-b-2 transition-colors duration-500 ${
+                activeField === "message" ? "border-red-600" : "border-gray-200"
+              }`}
+            >
               <label
-                className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor="message"
+                className={`absolute left-0 transition-all duration-300 pointer-events-none font-bold uppercase text-xs tracking-widest ${
+                  activeField === "message" || form.message
+                    ? "-top-6 text-red-600"
+                    : "top-4 text-gray-400"
+                }`}
               >
-                Message
+                04 / Project Details
               </label>
               <textarea
-                id="message"
                 name="message"
-                rows={5}
+                rows={3}
                 value={form.message}
                 onChange={handleChange}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                placeholder="How can we help?"
+                onFocus={() => setActiveField("message")}
+                onBlur={() => setActiveField(null)}
+                className="w-full bg-transparent py-4 text-xl md:text-3xl font-bold text-black focus:outline-none placeholder-transparent resize-none leading-tight"
+                placeholder="Message"
                 required
               />
             </div>
-            <div className="col-span-1 md:col-span-2 flex items-center gap-4">
+
+            {/* Action Button */}
+            <div className="pt-8">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold bg-red-600 text-white hover:bg-red-700 transition-colors disabled:opacity-60"
                 disabled={status === "submitting"}
+                className="group relative inline-flex h-20 md:h-24 w-full items-center justify-between px-8 md:px-12 overflow-hidden bg-black text-white hover:bg-red-600 transition-colors duration-500"
               >
-                {status === "submitting" ? "Sending..." : "Send message"}
+                <span className="relative z-10 text-xl md:text-2xl font-bold tracking-wide flex items-center gap-4">
+                  {status === "submitting" ? "Processing..." : "Send Message"}
+                </span>
+
+                <div className="relative z-10 w-12 h-12 md:w-16 md:h-16 bg-white text-black rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-45 group-hover:scale-110">
+                  {status === "success" ? (
+                    <FaPaperPlane className="w-5 h-5" />
+                  ) : (
+                    <FaArrowRight className="w-6 h-6" />
+                  )}
+                </div>
               </button>
-              {status === "success" && (
-                <span className="text-sm text-green-600">
-                  Thanks! We’ll get back to you shortly.
-                </span>
-              )}
+
               {status === "error" && (
-                <span className="text-sm text-red-600">
-                  Please fill out required fields.
-                </span>
+                <p className="mt-6 text-red-600 font-bold text-sm tracking-widest uppercase">
+                  * Please fill out all required fields.
+                </p>
+              )}
+              {status === "success" && (
+                <p className="mt-6 text-green-600 font-bold text-sm tracking-widest uppercase">
+                  * Message sent successfully.
+                </p>
               )}
             </div>
           </form>
         </div>
       </div>
-      {/* Pass the data prop here */}
+
       <CTASection data={cta} />
-    </div>
+    </main>
   );
 }

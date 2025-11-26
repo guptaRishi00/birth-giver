@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import CTASection from "@/components/CTASection";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaArrowDown } from "react-icons/fa";
 import { getGlobalData, getPageBySlug } from "@/data/loader";
 
 export default async function Services() {
+  // 1. Keep API Data Logic Exactly the Same
   const response = await getPageBySlug("services");
   const serviceBlock = response.data[0]?.blocks?.find(
     (block: any) => block.__component === "blocks.service"
@@ -14,122 +15,147 @@ export default async function Services() {
 
   const globalresponse = await getGlobalData();
   const cta = globalresponse?.data?.cta[0];
+
   return (
-    <div>
-      {/* Hero Section */}
-      <div className="relative h-screen overflow-hidden">
-        {" "}
-        {/* new */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src={herosection?.video?.url} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center text-white px-4">
-            <h1 className="text-4xl md:text-6xl font-bold">
-              {herosection.title}
-            </h1>
+    <main className="bg-white min-h-screen text-zinc-900 selection:bg-black selection:text-white">
+      {/* 2. Redesigned Hero Section (Immersive & Typographic) */}
+      <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 border-b border-zinc-200">
+        {/* Background Video with refined overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover scale-105 opacity-90 grayscale-[20%]"
+          >
+            <source src={herosection?.video?.url} type="video/mp4" />
+          </video>
+          {/* A sophisticated gradient overlay instead of flat black */}
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto">
+          <span className="inline-block px-4 py-2 mb-6 rounded-full border border-zinc-800 bg-white/80 backdrop-blur-md text-xs font-mono uppercase tracking-widest">
+            Our Capabilities
+          </span>
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9] text-zinc-900 mb-8 max-w-5xl">
+            {herosection.title}
+          </h1>
+
+          <div className="flex justify-between items-end border-t border-black/10 pt-8 mt-12">
+            <p className="text-zinc-600 max-w-md text-sm md:text-base">
+              We craft digital experiences that merge art, technology, and
+              strategy to push brands forward.
+            </p>
+            <div className="hidden md:flex flex-col items-center gap-2 animate-bounce duration-1000">
+              <span className="text-[10px] uppercase tracking-widest">
+                Scroll
+              </span>
+              <FaArrowDown className="text-xs" />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Services Section */}
-      <div className="w-full px-4 md:px-20 py-16 ">
-        <div className="w-full mx-auto">
-          <div className="space-y-16">
-            {services.map((service: any, index: any) => (
-              <div key={index} className="bg-white rounded-3xl overflow-hidden">
-                <div className="p-8 md:p-12">
-                  <div className="flex items-center justify-between mb-8">
-                    <div>
-                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                        {service.title}
-                      </h2>
-                      <p className="text-gray-600 text-justify max-w-8xl">
-                        {service.description}
+      {/* 3. Redesigned Services Loop (Sticky Layout) */}
+      <div className="w-full px-6 md:px-12 py-24 bg-white">
+        <div className="max-w-7xl mx-auto space-y-32">
+          {services.map((service: any, index: number) => (
+            <div
+              key={index}
+              className="group/section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 pt-12 border-t border-zinc-200 first:border-t-0 first:pt-0"
+            >
+              {/* Left Column: Sticky Title & Description */}
+              <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+                <span className="text-xs font-mono text-zinc-400 mb-4 block">
+                  0{index + 1} / SERVICES
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+                  {service.title}
+                </h2>
+                <p className="text-zinc-500 text-lg leading-relaxed mb-8">
+                  {service.description}
+                </p>
+                <div className="hidden lg:block">
+                  <Link
+                    href={service.href || "#"}
+                    className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide hover:gap-6 transition-all duration-300"
+                  >
+                    View Case Studies <FaArrowRight />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Right Column: Sub-Services Grid */}
+              <div className="lg:col-span-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
+                  {service.subServices.map(
+                    (subService: any, subIndex: number) => (
+                      <div key={subIndex} className="group cursor-pointer">
+                        {/* Image Container with "Reveal" Effect */}
+                        <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 mb-6">
+                          <Image
+                            src={
+                              subService.image?.url ||
+                              "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963f?q=80&w=1200&auto=format&fit=crop"
+                            }
+                            alt={subService.name || "Service Image"}
+                            fill
+                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale group-hover:grayscale-0"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                          {/* Corner Arrow Overlay */}
+                          <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="bg-white rounded-full p-3">
+                              <FaArrowRight className="w-4 h-4 -rotate-45" />
+                            </div>
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold text-zinc-900 mb-2 group-hover:underline decoration-1 underline-offset-4">
+                          {subService.title}
+                        </h3>
+                        <p className="text-zinc-500 text-sm leading-relaxed">
+                          {subService.description}
+                        </p>
+                      </div>
+                    )
+                  )}
+
+                  {/* "Get Quote" Card - Stylized to match the minimalist theme */}
+                  <div className="group relative w-full aspect-[4/3] bg-zinc-900 text-white flex flex-col justify-between p-8 overflow-hidden">
+                    <div className="relative z-10">
+                      <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center mb-6">
+                        <FaArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
+                      </div>
+                      <h4 className="text-2xl font-bold">Have an idea?</h4>
+                      <p className="text-zinc-400 text-sm mt-2">
+                        Let's build it together.
                       </p>
                     </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {service.subServices.map(
-                      (subService: any, subIndex: any) => (
-                        <div key={subIndex}>
-                          <div className="group bg-white border border-gray-200 rounded-xl h-full overflow-hidden hover:shadow-lg transition-all">
-                            <div className="relative h-50 w-full overflow-hidden">
-                              <Image
-                                src={
-                                  subService.image?.url ||
-                                  "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963f?q=80&w=1200&auto=format&fit=crop"
-                                }
-                                alt={subService.name || "Service Image"}
-                                fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                priority={subIndex < 3}
-                              />
-                            </div>
-                            <div className="p-6">
-                              <h4 className="text-lg font-semibold text-gray-900 mb-2">
-                                {subService.title}
-                              </h4>
-                              <p className="text-gray-600 text-sm leading-relaxed">
-                                {subService.description}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    )}
-                    {/* Get Your Quote Card */}
-                    <div className="group bg-linear-to-br from-red-600 to-red-700 border border-red-600 rounded-xl overflow-hidden hover:shadow-lg transition-all">
-                      <div className="relative h-50 w-full overflow-hidden bg-linear-to-br from-red-500 to-red-600 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <FaArrowRight className="w-8 h-8" />
-                          </div>
-                          <h4 className="text-lg font-semibold mb-2">
-                            Ready to Get Started?
-                          </h4>
-                          <p className="text-sm opacity-90 mb-4">
-                            Get your personalized quote today
-                          </p>
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <Link
-                          href="/contact"
-                          className="w-full inline-flex items-center justify-center px-6 py-3 bg-white text-red-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
-                        >
-                          Get Your Quote
-                          <FaArrowRight className="w-4 h-4 ml-2" />
-                        </Link>
-                      </div>
+                    <div className="relative z-10">
+                      <Link
+                        href="/contact"
+                        className="inline-block border-b border-white pb-1 text-sm uppercase tracking-widest hover:text-zinc-300 transition-colors"
+                      >
+                        Get a Quote
+                      </Link>
                     </div>
-                  </div>
 
-                  <div className="text-center mt-10 md:hidden">
-                    <Link
-                      href={service.href}
-                      className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
-                    >
-                      Explore {service.title}
-                      <FaArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
+                    {/* Hover Effect Background */}
+                    <div className="absolute inset-0 bg-zinc-800 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
+
       <CTASection data={cta} />
-    </div>
+    </main>
   );
 }
