@@ -4,120 +4,124 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
 import {
   BsLightbulb,
   BsClipboardData,
   BsMegaphone,
   BsCode,
+  BsArrowRight,
 } from "react-icons/bs";
 
 const iconMap: { [key: string]: React.ReactNode } = {
-  "End-to-End Film Production": <BsClipboardData className="w-5 h-5" />,
-  "Marketing & Strategy": <BsMegaphone className="w-5 h-5" />,
-  "Software & Website Development": <BsLightbulb className="w-5 h-5" />,
+  "End-to-End Film Production": <BsClipboardData className="w-6 h-6" />,
+  "Marketing & Strategy": <BsMegaphone className="w-6 h-6" />,
+  "Software & Website Development": <BsLightbulb className="w-6 h-6" />,
 };
 
 export default function Services({ data }: any) {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   if (!data?.cards) return null;
 
   return (
-    <div className="w-full px-4 md:px-20 py-20">
-      <div className="max-w-7xl mx-auto">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl md:text-7xl w-full mb-4 font-bold text-center"
-        >
-          {data.title || "Services"}
-        </motion.h1>
+    <section className="w-full py-24 bg-gray-50 lg:mt-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-16 space-y-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-sm font-bold tracking-widest text-red-600 uppercase"
+          >
+            What We Do
+          </motion.h2>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-6xl font-bold text-gray-900"
+          >
+            {data.title || "Our Services"}
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="w-24 h-1 bg-red-600 mx-auto rounded-full mt-6"
+          />
+        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-8"
-        >
-          {data.cards.map((card: any) => {
-            const icon = iconMap[card.title] || <BsCode className="w-5 h-5" />;
+        {/* Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {data.cards.map((card: any, index: number) => {
+            const icon = iconMap[card.title] || <BsCode className="w-6 h-6" />;
 
             return (
               <motion.div
                 key={card.id}
-                variants={itemVariants}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="group relative bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="group relative h-[500px] w-full overflow-hidden rounded-3xl shadow-xl cursor-pointer"
               >
-                {/* Image Container */}
-                <div className="relative h-64 overflow-hidden">
+                {/* 1. Background Image with Zoom Effect */}
+                <div className="absolute inset-0 w-full h-full">
                   <Image
                     src={card.image.url}
                     alt={card.title}
-                    width={100}
-                    height={100}
-                    className="w-full h-full object-cover transition-all duration-500"
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-
-                  {/* Icon Overlay */}
-                  <div className="absolute top-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {icon}
-                  </div>
+                  {/* Overlay Gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-300" />
                 </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800 group-hover:text-red-600 transition-colors">
-                    {card.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {card.description}
-                  </p>
+                {/* 2. Floating Icon Badge */}
+                <div className="absolute top-6 right-6 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 text-white shadow-lg group-hover:bg-red-600 group-hover:border-red-600 transition-colors duration-300">
+                  {icon}
+                </div>
 
-                  {/* Dynamic Learn More Button */}
-                  <Link
-                    href={card.link?.path || "#"}
-                    className="mt-4 text-red-600 font-medium text-sm hover:text-red-800 transition-colors inline-flex items-center pointer-events-auto"
-                  >
-                    {card.link?.name || "Learn More"}
-                    <svg
-                      className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </Link>
+                {/* 3. Content Area */}
+                {/* Added 'pb-12' here to lift everything up from the bottom edge */}
+                <div className="absolute bottom-0 left-0 w-full px-8 pb-12 flex flex-col justify-end h-full pointer-events-none">
+                  {/* Container that slides up on hover */}
+                  <div className="transform transition-transform duration-500 translate-y-8 group-hover:translate-y-0">
+                    <h3 className="text-2xl font-bold text-white mb-3 leading-tight drop-shadow-md">
+                      {card.title}
+                    </h3>
+
+                    {/* Description - Collapsible */}
+                    <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
+                      <div className="overflow-hidden">
+                        <p className="text-gray-200 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                          {card.description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Call to Action Button - RED PILL */}
+                    {/* Added 'mt-6' to give breathing room between text and button */}
+                    <div className="mt-6 pointer-events-auto">
+                      <Link
+                        href={card.link?.path || "#"}
+                        className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-red-600/30"
+                      >
+                        <span className="mr-2">
+                          {card.link?.name || "Learn More"}
+                        </span>
+                        <BsArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                      </Link>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

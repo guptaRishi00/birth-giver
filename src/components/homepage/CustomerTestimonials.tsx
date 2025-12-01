@@ -1,15 +1,14 @@
 "use client";
 
-import * as React from "react"; // Needed for the plugin ref
+import * as React from "react";
 import { motion } from "framer-motion";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay"; // Import Autoplay
+import Autoplay from "embla-carousel-autoplay";
 import { LuStar } from "react-icons/lu";
 import Image from "next/image";
 
@@ -29,10 +28,24 @@ const StarRating = ({ rating }: { rating: number }) => {
 };
 
 export default function CustomerTestimonials({ data }: any) {
-  // 1. Create the plugin instance for Auto-move
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+  const [count, setCount] = React.useState(0);
+
   const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true })
+    Autoplay({ delay: 2000, stopOnInteraction: false })
   );
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   if (!data?.testimonials) return null;
 
@@ -64,31 +77,26 @@ export default function CustomerTestimonials({ data }: any) {
           className="relative"
         >
           <Carousel
-            plugins={[plugin.current]} // Add the autoplay plugin here
+            setApi={setApi}
+            plugins={[plugin.current]}
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full max-w-6xl mx-auto" // Increased max-width for horizontal cards
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
+            className="w-full max-w-6xl mx-auto"
+            // --- FIX IS HERE: Use arrow functions to ignore the event object ---
+            onMouseEnter={() => plugin.current.stop()}
+            onMouseLeave={() => plugin.current.play()}
+            // ------------------------------------------------------------------
           >
             <CarouselContent className="-ml-4 py-6">
               {data.testimonials.map((testimonial: any, index: number) => (
-                // Changed basis to usually show 2 cards on desktop for the wide layout
                 <CarouselItem
                   key={testimonial.id}
                   className="pl-4 md:basis-1/2"
                 >
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    // 2. LAYOUT CHANGE: flex-col on mobile, flex-row on desktop
-                    className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden h-full flex flex-col md:flex-row"
-                  >
-                    {/* Image Section - Left Side on Desktop */}
+                  <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden h-full flex flex-col md:flex-row hover:shadow-lg transition-shadow duration-300">
+                    {/* Image Section */}
                     {testimonial.image?.url && (
                       <div className="relative h-64 w-full md:h-auto md:w-2/5 shrink-0 overflow-hidden">
                         <Image
@@ -101,14 +109,13 @@ export default function CustomerTestimonials({ data }: any) {
                       </div>
                     )}
 
-                    {/* Content Section - Right Side on Desktop */}
+                    {/* Content Section */}
                     <div className="p-6 md:p-8 flex flex-col grow justify-center">
                       <div className="mb-3">
                         <StarRating rating={+testimonial.starCount || 0} />
                       </div>
 
                       <blockquote className="text-gray-700 mb-4 grow">
-                        {/* 3. LINE CLAMP: This fixes the 'uneven' height issue */}
                         <p className="text-base leading-relaxed italic line-clamp-5 md:line-clamp-4">
                           "{testimonial.feedback.replace(/^"|"$/g, "")}"
                         </p>
@@ -118,19 +125,32 @@ export default function CustomerTestimonials({ data }: any) {
                         <div className="font-bold text-gray-900 text-lg">
                           {testimonial.name}
                         </div>
-                        <div className="text-sm text-gray-500 font-medium">
+                        <div className="text-sm text-gray-500 font-medium flex items-center">
                           Verified Customer
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-
-            <CarouselPrevious className="hidden md:flex -left-12 bg-white hover:bg-gray-100" />
-            <CarouselNext className="hidden md:flex -right-12 bg-white hover:bg-gray-100" />
           </Carousel>
+
+          {/* Slider Dots */}
+          <div className="flex justify-center gap-2 mt-8">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  current === index
+                    ? "w-8 h-2 bg-gray-800"
+                    : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

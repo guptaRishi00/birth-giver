@@ -1,81 +1,116 @@
 import Image from "next/image";
 import CTASection from "@/components/CTASection";
 import { getPageBySlug } from "@/data/loader";
+import { FaArrowRight } from "react-icons/fa";
 
 export default async function FilmProductionPage() {
   const response = await getPageBySlug("film-production");
-
-  // Access the first item in the data array to find the blocks
-  const filmBlock = response.data[0].blocks.find(
+  const filmBlock = response.data[0]?.blocks?.find(
     (block: any) => block.__component === "blocks.film"
   );
 
   const herosection = filmBlock?.herosection;
   const services = filmBlock?.services || [];
 
-  console.log("Film Production Page Data: ", herosection);
-
   return (
-    <div className="w-full">
-      {/* Video Hero Section */}
-      <div className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-        <video autoPlay loop muted className="w-full h-full object-cover">
-          <source src={herosection?.video?.url} type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-          <div className="text-center text-white px-4">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              {herosection?.title}
-            </h1>
-            <p className="text-lg md:text-xl max-w-3xl mx-auto">
-              {herosection?.description}
-            </p>
+    <main className="bg-white text-zinc-900 w-full min-h-screen selection:bg-red-600 selection:text-white">
+      {/* --- 1. Cinematic Hero Section --- */}
+      {/* Kept text white here because it sits on top of a video */}
+      <section className="relative h-screen w-full overflow-hidden">
+        {/* Background Video */}
+        <div className="absolute inset-0 w-full h-full">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-90"
+          >
+            <source src={herosection?.video?.url} type="video/mp4" />
+          </video>
+          {/* Gradient Overlay for Text Readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 h-full flex flex-col justify-end pb-24 px-6 md:px-20 max-w-7xl mx-auto">
+          <span className="text-red-500 tracking-[0.3em] uppercase text-sm font-bold mb-4 animate-fadeIn">
+            Est. Production House
+          </span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter mb-6 max-w-4xl text-white">
+            {herosection?.title}
+          </h1>
+          <p className="text-gray-200 text-lg md:text-xl max-w-2xl leading-relaxed mb-8">
+            {herosection?.description}
+          </p>
+
+          <div className="flex items-center gap-4">
+            {/* Smooth Scroll Indicator */}
+            <div className="h-[1px] w-12 bg-white/50" />
+            <span className="text-xs uppercase tracking-widest text-white/80">
+              Scroll to Explore
+            </span>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Services Section */}
-      <div className="w-full px-4 md:px-20 py-16">
+      {/* --- 2. Services Grid (Clean White Theme) --- */}
+      <section className="relative px-6 md:px-20 py-24 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {filmBlock?.title}
+          <div className="mb-20">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 text-zinc-900">
+              {filmBlock?.title || "Our Production Services"}
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
+            <p className="text-zinc-500 text-lg md:text-xl max-w-3xl leading-relaxed">
               {filmBlock?.description}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service: any, index: any) => (
               <div
                 key={index}
-                className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                // Cards keep dark background for image visibility, but sit on a white page
+                className="group relative h-[450px] w-full overflow-hidden rounded-2xl bg-zinc-100 shadow-xl hover:shadow-2xl transition-all duration-500"
               >
-                <div className="relative w-full h-44 sm:h-52 md:h-56">
+                {/* Background Image */}
+                <div className="absolute inset-0 w-full h-full">
                   <Image
                     src={service.image?.url}
                     alt={service.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover"
-                    priority={index < 3}
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
+                  {/* Dark Gradient Overlay to make text inside card readable */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
                 </div>
-                <div className="p-8">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {service.description}
-                  </p>
+
+                {/* Content Overlay */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <span className="text-red-500 font-mono text-xs uppercase tracking-widest mb-2 block opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                      0{index + 1} // Service
+                    </span>
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-500 transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-300 leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
+                      {service.description}
+                    </p>
+
+                    <div className="mt-6 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 delay-200">
+                      Learn More <FaArrowRight className="text-red-500" />
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
+
       <CTASection />
-    </div>
+    </main>
   );
 }

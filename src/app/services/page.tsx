@@ -53,9 +53,6 @@ export default async function Services() {
 
         {/* Hero Content */}
         <div className="relative z-10 w-full max-w-7xl mx-auto">
-          <span className="inline-block px-4 py-2 mb-6 rounded-full border border-zinc-800 bg-white/80 backdrop-blur-md text-xs font-mono uppercase tracking-widest">
-            Our Capabilities
-          </span>
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9] text-zinc-900 mb-8 max-w-5xl">
             {herosection.title}
           </h1>
@@ -109,7 +106,10 @@ export default async function Services() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
                   {service.subServices.map(
                     (subService: any, subIndex: number) => (
-                      <div key={subIndex} className="group cursor-pointer">
+                      <div
+                        key={subIndex}
+                        className="group flex flex-col h-full cursor-pointer"
+                      >
                         {/* Image Container with "Reveal" Effect */}
                         <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 mb-6">
                           <Image
@@ -124,18 +124,32 @@ export default async function Services() {
                           />
                           {/* Corner Arrow Overlay */}
                           <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="bg-white rounded-full p-3">
-                              <FaArrowRight className="w-4 h-4 -rotate-45" />
+                            <div className="bg-white rounded-full p-3 shadow-lg">
+                              <FaArrowRight className="w-4 h-4 -rotate-45 text-black" />
                             </div>
                           </div>
                         </div>
 
-                        <h3 className="text-xl font-bold text-zinc-900 mb-2 group-hover:underline decoration-1 underline-offset-4">
-                          {subService.title}
-                        </h3>
-                        <p className="text-zinc-500 text-sm leading-relaxed">
-                          {subService.description}
-                        </p>
+                        {/* Content */}
+                        <div className="flex flex-col flex-grow">
+                          <h3 className="text-xl font-bold text-zinc-900 mb-2 group-hover:text-black transition-colors">
+                            {subService.title}
+                          </h3>
+                          <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3">
+                            {subService.description}
+                          </p>
+
+                          {/* NEW CTA BUTTON */}
+                          <div className="mt-6 pt-4 border-t border-zinc-100">
+                            <Link
+                              href="/contact"
+                              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-900 hover:text-zinc-600 transition-colors"
+                            >
+                              Book Now
+                              <FaArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     )
                   )}

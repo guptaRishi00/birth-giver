@@ -25,7 +25,6 @@ const highlightText = (text: string | undefined, highlight: string) => {
 export default function IntroSection({ data }: any) {
   if (!data) return null;
 
-  // Extract text sections with highlights
   const main = highlightText(data?.title, "UK");
   const titleTwo = highlightText(data?.title2, "Empowering Businesses.");
   const rightDesc = highlightText(
@@ -156,7 +155,7 @@ export default function IntroSection({ data }: any) {
             </div>
 
             {/* ========== RIGHT SIDE CONTENT ========== */}
-            <div className="space-y-10">
+            <div className="space-y-10 py-2">
               <motion.div
                 className="bg-linear-to-br from-gray-50 to-white border border-gray-100 rounded-2xl p-8 shadow-sm"
                 initial={{ opacity: 0, y: 18 }}
@@ -189,7 +188,7 @@ export default function IntroSection({ data }: any) {
                       className="last:odd:col-span-2"
                     >
                       <motion.div
-                        className="group h-full p-4 rounded-xl bg-white border border-gray-100 hover:border-red-200 hover:shadow-md transition-all"
+                        className="group h-full p-4 rounded-xl bg-white border border-gray-300 hover:border-red-200 hover:shadow-md transition-all"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}

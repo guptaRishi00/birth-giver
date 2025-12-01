@@ -3,18 +3,18 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   FaFilm,
-  FaHandPeace,
   FaMapMarkerAlt,
   FaPhone,
   FaClock,
+  FaArrowRight,
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
 // Maps icons to the titles from your Strapi data
 const iconMap: { [key: string]: React.ReactNode } = {
-  "Our Address": <FaMapMarkerAlt className="text-red-500 text-2xl" />,
-  "Contact Us": <FaPhone className="text-red-500 text-2xl" />,
-  "Opening Hours": <FaClock className="text-red-500 text-2xl" />,
+  "Our Address": <FaMapMarkerAlt className="text-white text-2xl" />,
+  "Contact Us": <FaPhone className="text-white text-2xl" />,
+  "Opening Hours": <FaClock className="text-white text-2xl" />,
 };
 
 export default function CTASection({ data }: any) {
@@ -24,94 +24,122 @@ export default function CTASection({ data }: any) {
     router.push("/contact");
   };
 
-  if (!data?.card) return null; // Don't render if no data
+  if (!data?.card) return null;
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="bg-gray-900 py-20 md:py-32"
-    >
-      <div className="max-w-7xl mx-auto px-4 md:px-20">
-        <div className="text-center mb-16">
-          {/* Top Badge */}
+    <section className="relative w-full bg-neutral-950 py-24 md:py-32 overflow-hidden">
+      {/* --- Ambient Background Effects --- */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-10">
+        {/* Header Section */}
+        <div className="text-center mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-            className="inline-flex items-center gap-3 px-6 py-3 border border-white rounded-full mb-8"
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-5 py-2 bg-red-500/10 border border-red-500/20 rounded-full mb-8 backdrop-blur-md"
           >
-            <FaFilm className="text-red-500 text-lg" />
-            <span className="text-white font-medium text-sm uppercase tracking-wide">
+            <FaFilm className="text-red-500 text-sm" />
+            <span className="text-red-400 font-bold text-xs uppercase tracking-[0.2em]">
               {data.subtitle}
             </span>
           </motion.div>
 
-          {/* Main Heading */}
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-            // Use whitespace-pre-line to respect '\n' from the JSON
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-red-500 mb-12 leading-tight whitespace-pre-line"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight whitespace-pre-line"
           >
             {data.title}
+            <span className="text-red-600">.</span>
           </motion.h2>
+
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "100px" }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="h-1 bg-gradient-to-r from-red-600 to-transparent mx-auto rounded-full"
+          />
         </div>
 
-        {/* Three Cards Grid - Mapped Dynamically */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {data.card.map((card: any, index: number) => {
-            // Get the icon from the map, or null
             const icon = iconMap[card.title];
+            const isContactCard = card.title === "Contact Us";
 
             return (
               <motion.div
                 key={card.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.6,
-                  ease: "easeOut",
-                  delay: 0.6 + index * 0.2, // Staggered delay
+                  duration: 0.5,
+                  delay: 0.4 + index * 0.15,
                 }}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-7 border border-white/20 hover:border-red-500/50 transition-all duration-300 group"
+                // Changed padding: p-8 normally, but p-6 on tablet (md) to give text more room
+                className={`relative group p-8 md:p-6 lg:p-8 rounded-3xl border transition-all duration-500
+                  ${
+                    isContactCard
+                      ? "bg-gradient-to-br from-neutral-900 to-neutral-800 border-red-500/30 hover:border-red-500"
+                      : "bg-neutral-900/50 border-white/5 hover:border-white/10 hover:bg-neutral-900"
+                  }
+                  backdrop-blur-sm shadow-2xl hover:shadow-red-900/20 hover:-translate-y-2
+                `}
               >
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500/20 rounded-full mb-6 group-hover:bg-red-500/30 transition-colors duration-300">
-                    {icon} {/* Dynamic Icon */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
+
+                <div className="relative z-10 flex flex-col items-center text-center h-full">
+                  <div
+                    className={`
+                    w-16 h-16 rounded-2xl flex items-center justify-center mb-6 text-2xl shadow-lg transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3
+                    ${
+                      isContactCard
+                        ? "bg-red-600 text-white shadow-red-600/20"
+                        : "bg-neutral-800 text-gray-200 group-hover:bg-neutral-700"
+                    }
+                  `}
+                  >
+                    {icon}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    {card.title} {/* Dynamic Title */}
+
+                  <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                    {card.title}
                   </h3>
-                  {/* Use whitespace-pre-line for subtitles */}
-                  <p className="text-gray-300 leading-relaxed mb-4 whitespace-pre-line">
-                    {card.subtitle} {/* Dynamic Subtitle */}
+
+                  {/* Added 'break-words' to force emails to wrap */}
+                  <p className="text-gray-400 leading-relaxed mb-8 whitespace-pre-line text-sm md:text-base break-words w-full">
+                    {card.subtitle}
                   </p>
 
-                  {/* Conditionally render button for 'Contact Us' card */}
-                  {card.title === "Contact Us" && (
-                    <motion.button
-                      onClick={handleGetQuoteClick}
-                      className="inline-flex items-center gap-2 text-red-500 hover:text-red-400 transition-colors duration-300 font-semibold group/btn"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FaHandPeace className="text-lg group-hover/btn:rotate-12 transition-transform duration-300" />
-                      Get Your Quote
-                    </motion.button>
-                  )}
+                  <div className="mt-auto">
+                    {isContactCard ? (
+                      <motion.button
+                        onClick={handleGetQuoteClick}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group/btn relative overflow-hidden rounded-full bg-white text-black px-8 py-3 font-bold text-sm transition-all hover:bg-red-500 hover:text-white flex items-center gap-2"
+                      >
+                        <span>Get Your Quote</span>
+                        <FaArrowRight className="-rotate-45 group-hover/btn:rotate-0 transition-transform duration-300" />
+                      </motion.button>
+                    ) : (
+                      <div className="w-12 h-1 bg-neutral-800 rounded-full group-hover:bg-red-500/50 transition-colors duration-300" />
+                    )}
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
