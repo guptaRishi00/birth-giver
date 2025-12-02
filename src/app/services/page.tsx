@@ -7,7 +7,7 @@ import LogoLoop from "@/components/homepage/LogoLoop";
 import { getStrapiMedia } from "@/lib/utils";
 
 export default async function Services() {
-  // 1. Existing Page Data Fetching
+  // --- Data Fetching ---
   const response = await getPageBySlug("services");
   const serviceBlock = response.data[0]?.blocks?.find(
     (block: any) => block.__component === "blocks.service"
@@ -18,13 +18,11 @@ export default async function Services() {
   const globalresponse = await getGlobalData();
   const cta = globalresponse?.data?.cta[0];
 
-  // 2. Fetch Homepage data to get the Partner Brands (Collaborations)
   const homepageResponse = await getHomepageQuery();
   const collaborations = homepageResponse?.data?.blocks?.find(
     (block: any) => block.__component === "homepage.collaborations"
   );
 
-  // 3. Transform data for the LogoLoop component
   const logos =
     collaborations?.brands?.map((brand: any) => ({
       src: getStrapiMedia(brand.url),
@@ -34,173 +32,135 @@ export default async function Services() {
 
   return (
     <main className="bg-white min-h-screen text-zinc-900 selection:bg-black selection:text-white">
-      {/* --- Redesigned Hero Section (Immersive & Typographic) --- */}
-      <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 border-b border-zinc-200">
-        {/* Background Video with refined overlay */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* --- 1. HERO SECTION (Kept as requested) --- */}
+      <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 px-6 md:px-12 bg-zinc-900 overflow-hidden">
+        <div className="absolute inset-0 z-0">
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="w-full h-full object-cover scale-105 opacity-90 grayscale-[20%]"
+            className="w-full h-full object-cover opacity-70"
           >
             <source src={herosection?.video?.url} type="video/mp4" />
           </video>
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto">
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9] text-zinc-900 mb-8 max-w-5xl">
+        <div className="relative z-10 w-full max-w-screen-2xl mx-auto text-white">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter mb-8 leading-[0.9]">
             {herosection.title}
           </h1>
-
-          <div className="flex justify-between items-end border-t border-black/10 pt-8 mt-12">
-            <p className="text-zinc-600 max-w-md text-sm md:text-base">
+          <div className="flex justify-between items-end border-t border-white/20 pt-8 mt-8">
+            <p className="max-w-md text-lg text-zinc-300 font-light">
               We craft digital experiences that merge art, technology, and
-              strategy to push brands forward.
+              strategy.
             </p>
-            <div className="hidden md:flex flex-col items-center gap-2 animate-bounce duration-1000">
-              <span className="text-[10px] uppercase tracking-widest">
+            <div className="hidden md:flex flex-col items-center animate-bounce">
+              <span className="text-[10px] uppercase tracking-widest mb-2">
                 Scroll
               </span>
-              <FaArrowDown className="text-xs" />
+              <FaArrowDown />
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- Redesigned Services Loop (Sticky Layout) --- */}
-      <div className="w-full px-6 md:px-12 py-24 bg-white">
-        <div className="max-w-7xl mx-auto space-y-32">
+      {/* --- 2. THE NEW LAYOUT: Editorial / Zig-Zag --- */}
+      <div className="w-full bg-white">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-12 py-32">
           {services.map((service: any, index: number) => (
-            <div
-              key={index}
-              className="group/section grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 pt-12 border-t border-zinc-200 first:border-t-0 first:pt-0"
-            >
-              {/* Left Column: Sticky Title & Description */}
-              <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
-                <span className="text-xs font-mono text-zinc-400 mb-4 block">
-                  0{index + 1} / SERVICES
+            <div key={index} className="mb-48 last:mb-0">
+              {/* Category Header (Centered & Clean) */}
+              <div className="text-center max-w-5xl mx-auto mb-24">
+                <span className="inline-block py-1 px-3 border border-zinc-200 rounded-full text-xs font-bold uppercase tracking-widest text-zinc-400 mb-6">
+                  0{index + 1} — {service.title}
                 </span>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                  {service.title}
+                <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 mb-6">
+                  {service.title} Solutions
                 </h2>
-                <p className="text-zinc-500 text-lg leading-relaxed mb-8">
+                <p className="text-xl text-zinc-500 leading-relaxed">
                   {service.description}
                 </p>
-                <div className="hidden lg:block">
-                  <Link
-                    href={service.href || "#"}
-                    className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-wide hover:gap-6 transition-all duration-300"
-                  >
-                    View Case Studies <FaArrowRight />
-                  </Link>
-                </div>
               </div>
 
-              {/* Right Column: Sub-Services Grid */}
-              <div className="lg:col-span-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-                  {service.subServices.map(
-                    (subService: any, subIndex: number) => (
+              {/* Sub-Services: Alternating Rows */}
+              <div className="flex flex-col gap-32">
+                {service.subServices.map(
+                  (subService: any, subIndex: number) => {
+                    // Logic to alternate layout: Even = Image Left, Odd = Image Right
+                    const isEven = subIndex % 2 === 0;
+
+                    return (
                       <div
                         key={subIndex}
-                        className="group flex flex-col h-full cursor-pointer"
+                        className={`group flex flex-col lg:flex-row items-center gap-12 lg:gap-24 ${
+                          !isEven ? "lg:flex-row-reverse" : ""
+                        }`}
                       >
-                        {/* Image Container with "Reveal" Effect */}
-                        <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100 mb-6">
-                          <Image
-                            src={
-                              subService.image?.url ||
-                              "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963f?q=80&w=1200&auto=format&fit=crop"
-                            }
-                            alt={subService.name || "Service Image"}
-                            fill
-                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 grayscale group-hover:grayscale-0"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
-                          {/* Corner Arrow Overlay */}
-                          <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="bg-white rounded-full p-3 shadow-lg">
-                              <FaArrowRight className="w-4 h-4 -rotate-45 text-black" />
-                            </div>
+                        {/* Image Side (Half Width) */}
+                        <div className="w-full lg:w-1/2">
+                          <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-zinc-100">
+                            <Image
+                              src={
+                                subService.image?.url ||
+                                "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop"
+                              }
+                              alt={subService.title}
+                              fill
+                              className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                            />
+                            {/* Reveal Effect overlay */}
+                            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
                           </div>
                         </div>
 
-                        {/* Content */}
-                        <div className="flex flex-col flex-grow">
-                          <h3 className="text-xl font-bold text-zinc-900 mb-2 group-hover:text-black transition-colors">
+                        {/* Text Side (Half Width) */}
+                        <div className="w-full lg:w-1/2 flex flex-col justify-center">
+                          <span className="text-xs font-mono text-zinc-400 mb-4 block">
+                            0{index + 1}.0{subIndex + 1}
+                          </span>
+                          <h3 className="text-4xl md:text-5xl font-bold text-zinc-900 mb-6 leading-tight group-hover:text-zinc-600 transition-colors">
                             {subService.title}
                           </h3>
-                          <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3">
+                          <p className="text-lg text-zinc-500 leading-relaxed mb-8 max-w-md">
                             {subService.description}
                           </p>
 
-                          {/* NEW CTA BUTTON */}
-                          <div className="mt-6 pt-4 border-t border-zinc-100">
+                          <div className="flex items-center gap-6">
                             <Link
                               href="/contact"
-                              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-900 hover:text-zinc-600 transition-colors"
+                              className="inline-flex items-center gap-3 text-sm font-bold uppercase tracking-widest border-b border-black pb-1 hover:gap-5 transition-all duration-300"
                             >
-                              Book Now
-                              <FaArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                              Contact Us <FaArrowRight />
                             </Link>
                           </div>
                         </div>
                       </div>
-                    )
-                  )}
-
-                  {/* "Get Quote" Card */}
-                  <div className="group relative w-full aspect-[4/3] bg-zinc-900 text-white flex flex-col justify-between p-8 overflow-hidden">
-                    <div className="relative z-10">
-                      <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center mb-6">
-                        <FaArrowRight className="w-5 h-5 -rotate-45 group-hover:rotate-0 transition-transform duration-500" />
-                      </div>
-                      <h4 className="text-2xl font-bold">Have an idea?</h4>
-                      <p className="text-zinc-400 text-sm mt-2">
-                        Let's build it together.
-                      </p>
-                    </div>
-
-                    <div className="relative z-10">
-                      <Link
-                        href="/contact"
-                        className="inline-block border-b border-white pb-1 text-sm uppercase tracking-widest hover:text-zinc-300 transition-colors"
-                      >
-                        Get a Quote
-                      </Link>
-                    </div>
-
-                    {/* Hover Effect Background */}
-                    <div className="absolute inset-0 bg-zinc-800 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></div>
-                  </div>
-                </div>
+                    );
+                  }
+                )}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* --- NEW SECTION: Logo Loop (Clients) --- */}
+      {/* --- 3. Logo Loop --- */}
       {logos.length > 0 && (
         <section className="w-full py-24 bg-zinc-50 border-t border-zinc-200">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <h3 className="text-sm font-mono uppercase tracking-widest text-center text-zinc-500 mb-12">
-              Trusted by Industry Leaders
+          <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-12">
+              Our Collaborative Partners
             </h3>
-            <div className="relative h-32 flex items-center overflow-hidden">
+            <div className="relative h-20 w-full overflow-hidden grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
               <LogoLoop
                 logos={logos}
-                speed={50}
+                speed={40}
                 direction="left"
-                logoHeight={60}
+                logoHeight={45}
                 gap={80}
                 pauseOnHover
-                fadeOut
               />
             </div>
           </div>

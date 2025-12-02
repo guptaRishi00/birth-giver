@@ -1,15 +1,17 @@
 import Image from "next/image";
+import Link from "next/link"; // Added Link import
 import CTASection from "@/components/CTASection";
 import { FaArrowRight, FaCode, FaArrowDown } from "react-icons/fa";
 
 export default function SoftwareDevelopmentPage() {
   const services = [
     {
-      title: "Custom Web Applications", // Shortened slightly for impact
+      title: "Custom Web Applications",
       description:
         "Build powerful, scalable, and secure web applications tailored to your business workflows.",
       image:
         "https://images.unsplash.com/photo-1558655146-d09347e92766?w=500&h=300&fit=crop&crop=center",
+      link: "/services/web-apps", // You can add specific links here
     },
     {
       title: "Mobile App Ecosystems",
@@ -17,6 +19,7 @@ export default function SoftwareDevelopmentPage() {
         "High-performance native and cross-platform mobile apps for iOS and Android using Flutter & React Native.",
       image:
         "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=500&h=300&fit=crop&crop=center",
+      link: "/services/mobile",
     },
     {
       title: "ERP & CRM Architecture",
@@ -24,6 +27,7 @@ export default function SoftwareDevelopmentPage() {
         "Comprehensive enterprise systems that streamline operations and enhance customer relationships.",
       image:
         "https://images.unsplash.com/photo-1551434678-e076c223a692?w=500&h=300&fit=crop&crop=center",
+      link: "/services/erp-crm",
     },
     {
       title: "API Integration",
@@ -31,6 +35,7 @@ export default function SoftwareDevelopmentPage() {
         "Robust, secure APIs and third-party service integration for seamless system communication.",
       image:
         "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&h=300&fit=crop&crop=center",
+      link: "/services/api",
     },
     {
       title: "Cloud Infrastructure",
@@ -38,6 +43,7 @@ export default function SoftwareDevelopmentPage() {
         "Cloud-native applications and serverless architecture on AWS, Azure, and GCP.",
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=300&fit=crop&crop=center",
+      link: "/services/cloud",
     },
     {
       title: "E-Commerce Platforms",
@@ -45,6 +51,7 @@ export default function SoftwareDevelopmentPage() {
         "Custom online stores with secure payment integrations and subscription management.",
       image:
         "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=500&h=300&fit=crop&crop=center",
+      link: "/services/ecommerce",
     },
     {
       title: "Process Automation",
@@ -52,6 +59,7 @@ export default function SoftwareDevelopmentPage() {
         "RPA solutions and workflow optimization to reduce manual tasks and minimize errors.",
       image:
         "https://images.unsplash.com/photo-1516110833967-0b5716ca1387?w=600&auto=format&fit=crop&q=60",
+      link: "/services/automation",
     },
     {
       title: "UI/UX Engineering",
@@ -59,6 +67,7 @@ export default function SoftwareDevelopmentPage() {
         "User-centered design principles creating clean, beautiful interfaces that deliver exceptional experiences.",
       image:
         "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=500&h=300&fit=crop&crop=center",
+      link: "/services/ui-ux",
     },
   ];
 
@@ -109,7 +118,7 @@ export default function SoftwareDevelopmentPage() {
         </div>
       </section>
 
-      {/* 2. The Modular Grid (Replaced the standard Cards) */}
+      {/* 2. The Modular Grid */}
       <section className="w-full px-6 md:px-12 py-24 bg-white">
         <div className="max-w-screen-2xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16">
@@ -122,7 +131,7 @@ export default function SoftwareDevelopmentPage() {
             </p>
           </div>
 
-          {/* The Grid: Using gap-px for clean borders */}
+          {/* The Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 border border-zinc-200">
             {services.map((service, index) => (
               <div
@@ -134,6 +143,7 @@ export default function SoftwareDevelopmentPage() {
                   <span className="text-xs font-mono text-zinc-300">
                     0{index + 1}
                   </span>
+                  {/* Decorative Arrow (Top Right) */}
                   <FaArrowRight className="w-4 h-4 text-zinc-300 -rotate-45 group-hover:rotate-0 group-hover:text-zinc-900 transition-all duration-300" />
                 </div>
 
@@ -142,16 +152,23 @@ export default function SoftwareDevelopmentPage() {
                   <h3 className="text-2xl font-bold text-zinc-900 mb-4 leading-tight group-hover:translate-x-1 transition-transform duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed mb-8 opacity-80 group-hover:opacity-100">
+                  <p className="text-zinc-500 text-sm leading-relaxed mb-6 opacity-80 group-hover:opacity-100">
                     {service.description}
                   </p>
+
+                  {/* --- NEW CTA ADDED HERE --- */}
+                  <Link
+                    href={service.link || "/contact"}
+                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-zinc-900 border-b border-zinc-200 pb-1 group-hover:border-zinc-900 transition-colors duration-300"
+                  >
+                    View Solutions
+                    <FaArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
                 </div>
 
                 {/* Image Reveal Section */}
                 <div className="relative w-full aspect-[4/3] overflow-hidden mt-auto">
-                  {/* Overlay Gradient for text readability if needed, though we separated them */}
                   <div className="absolute inset-0 bg-zinc-900/0 group-hover:bg-zinc-900/5 z-10 transition-colors" />
-
                   <Image
                     src={service.image}
                     alt={service.title}
