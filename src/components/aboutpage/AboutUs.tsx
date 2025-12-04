@@ -275,7 +275,7 @@ export default function AboutUs({
           </div>
         </section>
 
-        {/* --- MEMBERS SECTION (MIXED HEIGHTS) --- */}
+        {/* --- MEMBERS SECTION --- */}
         <section className="w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -300,17 +300,14 @@ export default function AboutUs({
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 } items-center gap-12 lg:gap-24`}
               >
-                {/* Image Side - MIXED HEIGHT LOGIC */}
+                {/* Image Side - UPDATED: Index 1+ is now aspect-[6/7] */}
                 <div className="w-full lg:w-1/2">
                   <div className="relative group">
                     <div
-                      // Use conditional class logic based on index
-                      // Index 0: Taller Aspect Ratio (aspect-[3/4] md:aspect-[4/5])
-                      // Index 1+: Shorter Aspect Ratio (aspect-[4/5] md:aspect-square)
                       className={`relative w-full ${
                         index === 0
                           ? "aspect-[3/4] md:aspect-[4/5]"
-                          : "aspect-[4/5] md:aspect-square"
+                          : "aspect-[4/5] md:aspect-[6/7]"
                       } overflow-hidden rounded-2xl shadow-2xl transition-all duration-300`}
                     >
                       <SafeImage
