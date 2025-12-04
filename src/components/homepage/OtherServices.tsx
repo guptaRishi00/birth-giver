@@ -148,7 +148,7 @@ export default function OtherServices({ data, readyData }: any) {
         data={readyData}
       />
 
-      <div className="w-full py-20 bg-linear-to-br from-gray-50 to-white overflow-hidden">
+      <div className="w-full py-10 bg-linear-to-br from-gray-50 to-white overflow-hidden">
         {/* Header Section */}
         <div className="max-w-7xl mx-auto px-4 md:px-20 text-center mb-16">
           <motion.h2
@@ -203,13 +203,13 @@ export default function OtherServices({ data, readyData }: any) {
         </div>
 
         {/* --- ATTRACTIVE BOTTOM CTA SECTION --- */}
-        <div className="max-w-7xl mx-auto px-4 md:px-8 mt-24">
+        <div className="max-w-8xl mx-auto px-4 md:px-8 mt-16">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative overflow-hidden rounded-[2.5rem] bg-neutral-900 px-6 py-16 sm:px-16 sm:py-24 shadow-2xl"
+            className="relative overflow-hidden rounded-[2.5rem] bg-neutral-900 px-6 py-16 sm:px-16 sm:py-24 "
           >
             {/* Background Decor: Red Glows */}
             <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-red-600/20 blur-[100px] pointer-events-none" />

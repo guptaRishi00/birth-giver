@@ -27,7 +27,7 @@ export default function CTASection({ data }: any) {
   if (!data?.card) return null;
 
   return (
-    <section className="relative w-full bg-neutral-950 py-24 md:py-32 overflow-hidden">
+    <section className="relative w-full bg-neutral-950 py-24 md:py-16 overflow-hidden">
       {/* --- Ambient Background Effects --- */}
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 pointer-events-none" />

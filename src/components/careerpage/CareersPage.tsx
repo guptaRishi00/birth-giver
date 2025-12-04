@@ -6,10 +6,56 @@ import {
   FaArrowDown,
   FaArrowRight,
   FaCheck,
+  FaLightbulb,
+  FaUsers,
+  FaRocket,
+  FaHeart,
+  FaHandshake,
+  FaGlobe,
+  FaLaptopCode,
+  FaChartLine,
+  FaUmbrellaBeach,
+  FaMoneyBillWave,
+  FaCoffee,
+  FaGift,
 } from "react-icons/fa";
 import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import Link from "next/link";
+
+// Icon mapping function
+const getIconForCard = (
+  index: number,
+  type: "culture" | "perk" | "process"
+) => {
+  const cultureIcons = [FaLightbulb, FaUsers, FaRocket, FaHeart];
+
+  const perkIcons = [
+    FaHandshake, // Collaborative Environment
+    FaGlobe, // Remote/Global Opportunities
+    FaLaptopCode, // Latest Tech/Gear
+    FaChartLine, // Growth & Development
+    FaUmbrellaBeach, // Paid Time Off
+    FaMoneyBillWave, // Competitive Salary
+    FaCoffee, // Office Perks
+    FaGift, // Bonuses/Rewards
+  ];
+
+  const processIcons = [FaBriefcase, FaCheck, FaRocket];
+
+  const icons =
+    type === "culture"
+      ? cultureIcons
+      : type === "perk"
+      ? perkIcons
+      : processIcons;
+
+  const IconComponent = icons[index % icons.length];
+
+  return (
+    <IconComponent className="w-6 h-6 text-zinc-900 group-hover:text-red-600 transition-colors duration-300" />
+  );
+};
 
 export default function CareersPage({ careersBlock, cta }: any) {
   // Helpers for grid logic
@@ -90,7 +136,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
         </div>
       </section>
 
-      {/* --- 2. Company Culture (Architectural Grid) --- */}
+      {/* --- 2. Company Culture (Rounded Cards with Icons) --- */}
       <section className="relative w-full px-6 md:px-12 py-24 bg-white">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
@@ -105,15 +151,16 @@ export default function CareersPage({ careersBlock, cta }: any) {
             </div>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 border border-zinc-200">
+          {/* Grid with rounded corners */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {cultureCards.map((card: any, index: number) => (
               <div
                 key={card.id}
-                className="group relative bg-white h-full p-8 md:p-10 flex flex-col justify-between hover:bg-zinc-50 transition-colors duration-500 min-h-[300px]"
+                className="group relative bg-zinc-50 h-full p-8 md:p-10 flex flex-col justify-between hover:bg-white hover:shadow-xl transition-all duration-500 min-h-[300px] rounded-3xl border border-zinc-100"
               >
                 <div className="mb-6">
-                  <div className="w-12 h-12 rounded-full border border-zinc-200 flex items-center justify-center mb-6 group-hover:border-red-600 transition-colors duration-300">
+                  <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 flex items-center justify-center mb-6 group-hover:border-red-600 transition-colors duration-300 shadow-sm">
+                    {/* Prioritize Icons over Images if desired, or keep image check for Culture section */}
                     {card.image?.url ? (
                       <Image
                         src={card.image.url}
@@ -123,7 +170,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
                         className="w-6 h-6 grayscale group-hover:grayscale-0 transition-all"
                       />
                     ) : (
-                      <span className="text-xs font-mono">0{index + 1}</span>
+                      getIconForCard(index, "culture")
                     )}
                   </div>
                   <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">
@@ -134,7 +181,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
                   </p>
                 </div>
                 {/* Decorative corner */}
-                <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="w-2 h-2 bg-red-600 rounded-full"></div>
                 </div>
               </div>
@@ -144,7 +191,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 3. Job Openings (Clean List Layout) --- */}
-      <section className="w-full px-6 md:px-12 py-24 bg-zinc-50">
+      <section className="w-full px-6 md:px-12 py-24 bg-white">
         <div className="max-w-screen-xl mx-auto">
           <div className="text-center mb-16">
             <span className="text-red-600 font-mono text-xs uppercase tracking-widest mb-4 block">
@@ -165,7 +212,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="group bg-white rounded-none border border-zinc-200 p-8 md:p-12 hover:border-red-600 transition-all duration-300 relative overflow-hidden"
+                className="group bg-zinc-50 rounded-3xl border border-zinc-200 p-8 md:p-12 hover:border-red-600 hover:shadow-lg transition-all duration-300 relative overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-1 h-full bg-red-600 transform -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
 
@@ -176,7 +223,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
                       {job?.tags?.map((tag: any) => (
                         <span
                           key={tag.id}
-                          className="px-2 py-1 bg-zinc-100 text-zinc-600 text-[10px] font-mono uppercase tracking-widest"
+                          className="px-3 py-1 bg-white border border-zinc-200 text-zinc-600 text-[10px] font-mono uppercase tracking-widest rounded-full"
                         >
                           {tag.title}
                         </span>
@@ -199,7 +246,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
 
                     <div className="grid md:grid-cols-2 gap-8 mb-8">
                       <div>
-                        <h4 className="font-bold text-zinc-900 mb-4 uppercase text-xs tracking-widest border-b border-zinc-100 pb-2">
+                        <h4 className="font-bold text-zinc-900 mb-4 uppercase text-xs tracking-widest border-b border-zinc-200 pb-2">
                           Requirements
                         </h4>
                         <ul className="space-y-2">
@@ -211,14 +258,14 @@ export default function CareersPage({ careersBlock, cta }: any) {
                                 key={i}
                                 className="flex items-start text-sm text-zinc-500"
                               >
-                                <span className="mr-2 mt-1.5 w-1 h-1 bg-red-600 rounded-full shrink-0"></span>
+                                <span className="mr-2 mt-1.5 w-1.5 h-1.5 bg-red-600 rounded-full shrink-0"></span>
                                 {req.replace(/^- /, "")}
                               </li>
                             ))}
                         </ul>
                       </div>
                       <div>
-                        <h4 className="font-bold text-zinc-900 mb-4 uppercase text-xs tracking-widest border-b border-zinc-100 pb-2">
+                        <h4 className="font-bold text-zinc-900 mb-4 uppercase text-xs tracking-widest border-b border-zinc-200 pb-2">
                           Benefits
                         </h4>
                         <ul className="space-y-2">
@@ -230,7 +277,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
                                 key={i}
                                 className="flex items-start text-sm text-zinc-500"
                               >
-                                <FaCheck className="mr-2 mt-0.5 w-3 h-3 text-zinc-300 shrink-0" />
+                                <FaCheck className="mr-2 mt-0.5 w-3 h-3 text-green-500 shrink-0" />
                                 {ben.replace(/^- /, "")}
                               </li>
                             ))}
@@ -238,7 +285,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
                       </div>
                     </div>
 
-                    <button className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-900 text-white font-bold uppercase tracking-widest text-xs hover:bg-red-600 transition-colors duration-300">
+                    <button className="inline-flex items-center gap-2 px-8 py-4 bg-zinc-900 text-white font-bold uppercase tracking-widest text-xs rounded-full hover:bg-red-600 transition-colors duration-300 shadow-lg hover:shadow-red-600/20">
                       Apply Now <FaArrowRight />
                     </button>
                   </div>
@@ -249,8 +296,8 @@ export default function CareersPage({ careersBlock, cta }: any) {
         </div>
       </section>
 
-      {/* --- 4. Perks & Benefits (Grid with Iconography) --- */}
-      <section className="relative w-full px-6 md:px-12 py-24 bg-white border-t border-zinc-100">
+      {/* --- 4. Perks & Benefits (Rounded Grid with Icons) --- */}
+      <section className="relative w-full px-6 md:px-12 py-24 bg-zinc-50 border-t border-zinc-100">
         <div className="max-w-screen-2xl mx-auto">
           <div className="mb-16">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
@@ -261,24 +308,19 @@ export default function CareersPage({ careersBlock, cta }: any) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 border border-zinc-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {perkCards.map((card: any, index: number) => (
               <div
                 key={card.id}
-                className="bg-white p-8 flex flex-col items-start hover:bg-zinc-50 transition-colors duration-300 min-h-[200px]"
+                className="bg-white p-8 flex flex-col items-start hover:shadow-xl transition-all duration-300 min-h-[200px] rounded-3xl border border-zinc-100 group"
               >
                 <div className="mb-auto">
-                  {card.image?.url && (
-                    <Image
-                      src={card.image.url}
-                      alt={card.title}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8 mb-6"
-                    />
-                  )}
+                  <div className="w-12 h-12 bg-zinc-50 rounded-xl flex items-center justify-center mb-6 text-zinc-900 group-hover:text-red-600 transition-colors">
+                    {/* UPDATED: Removed check for card.image.url to force new icons */}
+                    {getIconForCard(index, "perk")}
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-zinc-900">
+                <h3 className="text-lg font-bold text-zinc-900 group-hover:text-red-600 transition-colors">
                   {card.title}
                 </h3>
               </div>
@@ -299,11 +341,15 @@ export default function CareersPage({ careersBlock, cta }: any) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {processSteps.map((step: any, index: number) => (
-              <div key={step.id} className="relative group">
-                <div className="text-6xl md:text-8xl font-black text-white/5 absolute -top-4 -left-4 z-0 group-hover:text-white/10 transition-colors">
+              <div
+                key={step.id}
+                className="relative group bg-white/5 p-8 rounded-3xl border border-white/5 hover:bg-white/10 transition-colors duration-300"
+              >
+                <div className="text-6xl md:text-8xl font-black text-white/5 absolute top-4 right-4 z-0 group-hover:text-white/10 transition-colors">
                   0{index + 1}
                 </div>
-                <div className="relative z-10 pt-12 pl-6">
+                <div className="relative z-10 pt-4">
+                  <div className="mb-6">{getIconForCard(index, "process")}</div>
                   <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-red-500 transition-colors">
                     {step.title}
                   </h3>

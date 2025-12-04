@@ -149,7 +149,7 @@ export default function FooterComponent({ data }: any) {
         </div>
 
         {/* Bottom Section: Locations & Copyright */}
-        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-neutral-500">
+        <div className="mt-6 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 text-xs text-neutral-500">
           {/* We Work With - Horizontal List now */}
           <div className="flex flex-wrap items-center gap-x-2">
             <span className="text-neutral-300 font-semibold">We work in:</span>

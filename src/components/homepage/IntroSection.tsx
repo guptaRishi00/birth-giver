@@ -53,10 +53,10 @@ export default function IntroSection({ data }: any) {
         />
       </div>
 
-      <div className="relative w-full px-6 md:px-20 pt-30">
+      <div className="relative w-full px-6 md:px-20 pt-16">
         <div className="max-w-6xl mx-auto">
           {/* ------------------ HERO TITLE ------------------ */}
-          <div className="text-center mb-24">
+          <div className="text-center mb-16">
             {/* Badge */}
             <motion.div
               className="inline-flex items-center gap-2 mb-6 px-4 py-2 border border-red-100 bg-red-50 rounded-full"

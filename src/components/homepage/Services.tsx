@@ -22,8 +22,8 @@ export default function Services({ data }: any) {
   if (!data?.cards) return null;
 
   return (
-    <section className="w-full py-24 bg-gray-50 lg:mt-10">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <section className="w-full py-16 bg-gray-50 lg:mt-10">
+      <div className="max-w-8xl mx-auto px-4 md:px-8">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-4">
           <motion.h2

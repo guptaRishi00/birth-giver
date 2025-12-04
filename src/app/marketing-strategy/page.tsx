@@ -134,7 +134,7 @@ export default async function MarketingStrategyPage() {
               return (
                 <div
                   key={service.id || index}
-                  className="group relative bg-white h-full flex flex-col p-8 md:p-10 transition-all duration-500 hover:z-10"
+                  className="group relative bg-white rounded-4xl h-full flex flex-col p-8 md:p-10 transition-all duration-500 hover:z-10"
                 >
                   {/* 1. TITLE */}
                   <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6 tracking-tight">

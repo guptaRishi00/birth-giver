@@ -50,8 +50,8 @@ export default function CustomerTestimonials({ data }: any) {
   if (!data?.testimonials) return null;
 
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section className="py-10">
+      <div className="max-w-[1600px] mx-auto w-full px-6 md:px-12">
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -74,7 +74,7 @@ export default function CustomerTestimonials({ data }: any) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-          className="relative"
+          className="relative  w-full"
         >
           <Carousel
             setApi={setApi}
@@ -83,7 +83,7 @@ export default function CustomerTestimonials({ data }: any) {
               align: "start",
               loop: true,
             }}
-            className="w-full max-w-6xl mx-auto"
+            className="w-full mx-auto"
             // --- FIX IS HERE: Use arrow functions to ignore the event object ---
             onMouseEnter={() => plugin.current.stop()}
             onMouseLeave={() => plugin.current.play()}

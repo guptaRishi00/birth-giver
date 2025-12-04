@@ -51,7 +51,7 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
   if (!projects || projects.length === 0) return null;
 
   return (
-    <section className="w-full py-12 md:py-20">
+    <section className="w-full py-12 md:py-10">
       <div className="w-full">
         {/* Header */}
         <div className="max-w-7xl mx-auto px-6 mb-8 md:mb-12">

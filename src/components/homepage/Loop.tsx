@@ -82,8 +82,8 @@ export default function Loop({ data }: any) {
 
   if (!data?.numbers || !data?.brands) return null;
   return (
-    <section className="w-full py-20 bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-12">
+    <section className="w-full py-10 bg-linear-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+      <div className="max-w-8xl mx-auto px-6 md:px-10 lg:px-12">
         <div className="text-center mb-16">
           <p className="text-sm uppercase tracking-widest text-gray-500 dark:text-blue-400 font-medium">
             {data.subtitle}
@@ -146,7 +146,7 @@ export default function Loop({ data }: any) {
                   logos={logos}
                   speed={50}
                   direction="left"
-                  logoHeight={120}
+                  logoHeight={50}
                   gap={60}
                   pauseOnHover
                   fadeOut
