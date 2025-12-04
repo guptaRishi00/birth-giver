@@ -5,7 +5,7 @@ import IntroSection from "@/components/homepage/IntroSection";
 import Loop from "@/components/homepage/Loop";
 import OtherServices from "@/components/homepage/OtherServices";
 import Services from "@/components/homepage/Services";
-import ProjectPage from "@/components/projectpage/ProjectPage";
+import CinematicCarousel from "@/components/film/CinematicCarousel"; // Import the carousel
 import { getGlobalData, getHomepageQuery, getProject } from "@/data/loader";
 
 export default async function Home() {
@@ -51,14 +51,8 @@ export default async function Home() {
       <Services data={services} />
       <OtherServices data={otherServices} readyData={ready} />
 
-      {/* Projects Section - Reusing the ProjectPage component with limit */}
-      <ProjectPage
-        projects={projects}
-        showHero={false}
-        showCta={false}
-        heading="Our Latest Projects"
-        limit={2}
-      />
+      {/* Replaced ProjectPage with CinematicCarousel */}
+      <CinematicCarousel projects={projects} />
 
       <CustomerTestimonials data={testimonials} />
       <Loop data={collaborations} />

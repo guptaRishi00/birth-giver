@@ -55,10 +55,10 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
       <div className="w-full">
         {/* Header */}
         <div className="max-w-7xl mx-auto px-6 mb-10 md:mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 mb-3 tracking-tight">
+          <h2 className="text-4xl md:text-5xl text-center font-bold text-zinc-900 mb-3 tracking-tight">
             Featured Productions
           </h2>
-          <p className="text-zinc-500 text-lg">
+          <p className="text-zinc-500 text-center text-lg">
             Our latest originals and cinematic releases.
           </p>
         </div>
