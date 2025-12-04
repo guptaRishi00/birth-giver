@@ -150,7 +150,7 @@ export default function OtherServices({ data, readyData }: any) {
 
       <div className="w-full py-10 bg-linear-to-br from-gray-50 to-white overflow-hidden">
         {/* Header Section */}
-        <div className="max-w-7xl mx-auto px-4 md:px-20 text-center mb-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-20 text-center mb-20">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
