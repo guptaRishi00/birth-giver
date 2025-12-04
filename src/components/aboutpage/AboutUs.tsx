@@ -57,7 +57,7 @@ export default function AboutUs({
   return (
     <div className="bg-white min-h-screen flex flex-col">
       {/* =========================================
-          1. CINEMATIC HERO SECTION (UPDATED)
+          1. CINEMATIC HERO SECTION
       ========================================= */}
       <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 overflow-hidden bg-black">
         {/* Background Video */}
@@ -275,7 +275,7 @@ export default function AboutUs({
           </div>
         </section>
 
-        {/* --- MEMBERS SECTION (UPDATED: Clean, No Gray Backdrop) --- */}
+        {/* --- MEMBERS SECTION (MIXED HEIGHTS) --- */}
         <section className="w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -300,10 +300,19 @@ export default function AboutUs({
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 } items-center gap-12 lg:gap-24`}
               >
-                {/* Image Side - CLEAN, NO BACKDROP */}
+                {/* Image Side - MIXED HEIGHT LOGIC */}
                 <div className="w-full lg:w-1/2">
                   <div className="relative group">
-                    <div className="relative w-full aspect-[3/4] md:aspect-[4/5] overflow-hidden rounded-2xl shadow-2xl">
+                    <div
+                      // Use conditional class logic based on index
+                      // Index 0: Taller Aspect Ratio (aspect-[3/4] md:aspect-[4/5])
+                      // Index 1+: Shorter Aspect Ratio (aspect-[4/5] md:aspect-square)
+                      className={`relative w-full ${
+                        index === 0
+                          ? "aspect-[3/4] md:aspect-[4/5]"
+                          : "aspect-[4/5] md:aspect-square"
+                      } overflow-hidden rounded-2xl shadow-2xl transition-all duration-300`}
+                    >
                       <SafeImage
                         url={member.image?.url}
                         alt={`${member.name}`}
