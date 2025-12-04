@@ -183,7 +183,7 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
               key={index}
               onClick={() => api?.scrollTo(index)}
               className={cn(
-                "h-3 w-3 rounded-full transition-all duration-500",
+                "h-2 w-2 rounded-full transition-all duration-500",
                 current === index
                   ? "bg-zinc-900"
                   : "bg-zinc-300 hover:bg-zinc-400"
