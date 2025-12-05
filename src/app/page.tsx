@@ -7,6 +7,7 @@ import OtherServices from "@/components/homepage/OtherServices";
 import Services from "@/components/homepage/Services";
 import CinematicCarousel from "@/components/film/CinematicCarousel"; // Import the carousel
 import { getGlobalData, getHomepageQuery, getProject } from "@/data/loader";
+import OurBrandsLogos from "@/components/OurBrandsLogos";
 
 export default async function Home() {
   const response = await getHomepageQuery();
@@ -48,11 +49,12 @@ export default async function Home() {
     <div>
       <HeroSection data={herosection} />
       <IntroSection data={introSection} />
+      <OurBrandsLogos data={collaborations} />
       <Services data={services} />
+      <CinematicCarousel projects={projects} />
       <OtherServices data={otherServices} readyData={ready} />
 
       {/* Replaced ProjectPage with CinematicCarousel */}
-      <CinematicCarousel projects={projects} />
 
       <CustomerTestimonials data={testimonials} />
       <Loop data={collaborations} />

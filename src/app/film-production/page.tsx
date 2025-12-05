@@ -7,17 +7,17 @@ import {
   getProject,
 } from "@/data/loader";
 import { getStrapiMedia } from "@/lib/utils";
-import { FaArrowRight, FaFilm } from "react-icons/fa";
+import { FaFilm } from "react-icons/fa"; // Removed FaArrowRight (now in ServiceCard)
 import LogoLoop from "@/components/homepage/LogoLoop";
 import CTASectionTwo from "@/components/CTASectionTwo";
-import CinematicCarousel from "@/components/film/CinematicCarousel"; // Import the new component
+import CinematicCarousel from "@/components/film/CinematicCarousel";
+import ServiceCard from "@/components/film/ServiceCard";
 
 export default async function FilmProductionPage() {
-  // 1. Fetch Global Data
+  // ... [Your existing data fetching code - NO CHANGE] ...
   const globalResponse = await getGlobalData();
   const cta = globalResponse?.data?.cta?.[0];
 
-  // 2. Fetch Data for Hero
   const pageResponse = await getPageBySlug("film-production");
   const pageBlock =
     pageResponse?.data?.[0]?.blocks?.find(
@@ -29,7 +29,6 @@ export default async function FilmProductionPage() {
 
   const herosection = pageBlock?.herosection;
 
-  // 3. Fetch Data for Services Grid
   const servicesResponse = await getPageBySlug("services");
   const serviceBlock = servicesResponse?.data?.[0]?.blocks?.find(
     (block: any) => block.__component === "blocks.service"
@@ -40,7 +39,6 @@ export default async function FilmProductionPage() {
   );
   const subServices = filmServiceData?.subServices || [];
 
-  // 4. Fetch Homepage Data for Brands
   const homepageResponse = await getHomepageQuery();
   const collaborations = homepageResponse?.data?.blocks?.find(
     (block: any) => block.__component === "homepage.collaborations"
@@ -53,10 +51,8 @@ export default async function FilmProductionPage() {
       title: brand.name,
     })) || [];
 
-  // 5. Fetch Projects Data for the Carousel
   const { data: projects } = await getProject();
 
-  // Fallback values
   const heroTitle = herosection?.title || "Film Production";
   const heroDesc =
     herosection?.description ||
@@ -67,7 +63,7 @@ export default async function FilmProductionPage() {
 
   return (
     <main className="bg-white text-zinc-900 w-full min-h-screen selection:bg-red-600 selection:text-white">
-      {/* 1. HERO SECTION */}
+      {/* 1. HERO SECTION (NO CHANGE) */}
       <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 overflow-hidden">
         <div className="absolute inset-0 w-full h-full z-0">
           <video
@@ -132,52 +128,24 @@ export default async function FilmProductionPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-gray-100 p-5 w-full items-stretch">
             {subServices.map((service: any, index: number) => {
               const imageUrl = getStrapiMedia(service.image?.url);
+
+              // 2. UPDATED TO USE COMPONENT WITH POPUP
               return (
-                <div
+                <ServiceCard
                   key={service.id || index}
-                  className="group relative bg-white rounded-4xl h-full flex flex-col p-8 md:p-10 transition-all duration-500 hover:z-10"
-                >
-                  <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6 tracking-tight">
-                    {service.title}
-                  </h3>
-                  <div className="relative w-full mb-8 overflow-hidden bg-zinc-50 rounded-lg aspect-video">
-                    {imageUrl ? (
-                      <Image
-                        src={imageUrl}
-                        alt={service.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-zinc-300 text-sm font-mono border border-zinc-100">
-                        IMAGE NOT FOUND
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-zinc-500 text-base leading-relaxed mb-8 flex-grow">
-                    {service.description}
-                  </p>
-                  <div className="mt-auto w-full">
-                    <Link
-                      href="/contact"
-                      className="flex items-center justify-center gap-3 w-full py-4 bg-white border border-zinc-200 text-zinc-900 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-red-600 hover:text-white hover:border-red-600 hover:shadow-lg group-hover:border-zinc-300"
-                    >
-                      <span>Start Project</span>
-                      <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </div>
-                </div>
+                  service={service}
+                  imageUrl={imageUrl}
+                />
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* 3. NEW CINEMATIC CAROUSEL */}
+      {/* 3. NEW CINEMATIC CAROUSEL (NO CHANGE) */}
       <CinematicCarousel projects={projects} />
 
-      {/* 4. BRANDS LOOP */}
+      {/* 4. BRANDS LOOP (NO CHANGE) */}
       {logos.length > 0 && (
         <section className="w-full py-24">
           <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">

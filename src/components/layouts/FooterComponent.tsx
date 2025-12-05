@@ -4,6 +4,7 @@ import { ChevronRight, Send } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BsInstagram, BsLinkedin, BsTiktok } from "react-icons/bs";
+import Image from "next/image";
 
 export default function FooterComponent({ data }: any) {
   // Map social icons to the component array
@@ -38,10 +39,14 @@ export default function FooterComponent({ data }: any) {
           {/* Section 1: Brand and Socials (Spans 4 columns) */}
           <div className="lg:col-span-4 space-y-6">
             <div>
-              <h3 className="text-white text-3xl font-bold tracking-tight mb-2">
-                {data?.title}
-                <span className="text-red-600">.</span>
-              </h3>
+              <Image
+                src={"/logo.webp"}
+                alt={"logo"}
+                width={130}
+                height={130}
+                priority
+                className="w-24 md:w-[180px] h-auto mb-5"
+              />
               <p className="text-neutral-500 leading-relaxed text-sm max-w-xs">
                 {data?.description}
               </p>

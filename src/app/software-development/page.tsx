@@ -8,10 +8,11 @@ import {
   getProject,
 } from "@/data/loader";
 import { getStrapiMedia } from "@/lib/utils";
-import { FaArrowRight, FaCode } from "react-icons/fa";
+import { FaCode } from "react-icons/fa"; // Removed FaArrowRight (now in ServiceCard)
 import LogoLoop from "@/components/homepage/LogoLoop";
 import CTASectionTwo from "@/components/CTASectionTwo";
-import CinematicCarousel from "@/components/film/CinematicCarousel"; // Import the carousel
+import CinematicCarousel from "@/components/film/CinematicCarousel";
+import ServiceCard from "@/components/film/ServiceCard";
 
 export default async function SoftwareDevelopmentPage() {
   // 1. Fetch Global Data (for CTA)
@@ -132,49 +133,13 @@ export default async function SoftwareDevelopmentPage() {
             {subServices.map((service: any, index: number) => {
               const imageUrl = getStrapiMedia(service.image?.url);
 
+              // 2. USE THE POPUP COMPONENT HERE
               return (
-                <div
+                <ServiceCard
                   key={service.id || index}
-                  className="group relative bg-white rounded-4xl h-full flex flex-col p-8 md:p-10 transition-all duration-500 hover:z-10"
-                >
-                  {/* 1. TITLE */}
-                  <h3 className="text-3xl md:text-4xl font-bold text-zinc-900 mb-6 tracking-tight">
-                    {service.title}
-                  </h3>
-
-                  {/* 2. IMAGE (Aspect Video) */}
-                  <div className="relative w-full mb-8 overflow-hidden bg-zinc-50 rounded-lg aspect-video">
-                    {imageUrl ? (
-                      <Image
-                        src={imageUrl}
-                        alt={service.title}
-                        fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-zinc-300 text-sm font-mono border border-zinc-100">
-                        [Image Not Available]
-                      </div>
-                    )}
-                  </div>
-
-                  {/* 3. DESCRIPTION (Flex Grow) */}
-                  <p className="text-zinc-500 text-base leading-relaxed mb-8 flex-grow">
-                    {service.description}
-                  </p>
-
-                  {/* 4. BUTTON (Full width, rounded-2xl) */}
-                  <div className="mt-auto w-full">
-                    <Link
-                      href="/contact"
-                      className="flex items-center justify-center gap-3 w-full py-4 bg-white border border-zinc-200 text-zinc-900 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all duration-300 hover:bg-red-600 hover:text-white hover:border-red-600 hover:shadow-lg group-hover:border-zinc-300"
-                    >
-                      <span>Start Project</span>
-                      <FaArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                  </div>
-                </div>
+                  service={service}
+                  imageUrl={imageUrl}
+                />
               );
             })}
           </div>

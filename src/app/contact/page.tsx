@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import CTASection from "@/components/CTASection";
-import { FaArrowRight, FaPaperPlane } from "react-icons/fa";
+import { FaArrowRight, FaPaperPlane, FaChevronDown } from "react-icons/fa";
 
 export default function ContactPage({ cta }: { cta: any }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
+    inquiryType: "",
     message: "",
   });
 
@@ -19,7 +20,9 @@ export default function ContactPage({ cta }: { cta: any }) {
   const [activeField, setActiveField] = useState<string | null>(null);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -27,7 +30,7 @@ export default function ContactPage({ cta }: { cta: any }) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    if (!form.name || !form.email || !form.message || !form.inquiryType) {
       setStatus("error");
       return;
     }
@@ -35,7 +38,13 @@ export default function ContactPage({ cta }: { cta: any }) {
       setStatus("submitting");
       await new Promise((r) => setTimeout(r, 1500));
       setStatus("success");
-      setForm({ name: "", email: "", phone: "", message: "" });
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        inquiryType: "",
+        message: "",
+      });
     } catch {
       setStatus("error");
     }
@@ -109,7 +118,7 @@ export default function ContactPage({ cta }: { cta: any }) {
             onSubmit={handleSubmit}
             className="space-y-16 max-w-xl mx-auto w-full pt-12 lg:pt-0"
           >
-            {/* Input Field: Name */}
+            {/* 01 Name */}
             <div
               className={`relative border-b-2 transition-colors duration-500 ${
                 activeField === "name" ? "border-red-600" : "border-gray-200"
@@ -137,7 +146,7 @@ export default function ContactPage({ cta }: { cta: any }) {
               />
             </div>
 
-            {/* Input Field: Email */}
+            {/* 02 Email */}
             <div
               className={`relative border-b-2 transition-colors duration-500 ${
                 activeField === "email" ? "border-red-600" : "border-gray-200"
@@ -165,7 +174,7 @@ export default function ContactPage({ cta }: { cta: any }) {
               />
             </div>
 
-            {/* Input Field: Phone */}
+            {/* 03 Phone */}
             <div
               className={`relative border-b-2 transition-colors duration-500 ${
                 activeField === "phone" ? "border-red-600" : "border-gray-200"
@@ -192,7 +201,48 @@ export default function ContactPage({ cta }: { cta: any }) {
               />
             </div>
 
-            {/* Input Field: Message */}
+            {/* 04 Inquiry Type */}
+            <div
+              className={`relative border-b-2 transition-colors duration-500 ${
+                activeField === "inquiryType"
+                  ? "border-red-600"
+                  : "border-gray-200"
+              }`}
+            >
+              <label
+                className={`absolute left-0 transition-all duration-300 pointer-events-none font-bold uppercase text-xs tracking-widest ${
+                  activeField === "inquiryType" || form.inquiryType
+                    ? "-top-6 text-red-600"
+                    : "top-4 text-gray-400"
+                }`}
+              >
+                04 / Inquiry Type
+              </label>
+              <div className="relative">
+                <select
+                  name="inquiryType"
+                  value={form.inquiryType}
+                  onChange={handleChange}
+                  onFocus={() => setActiveField("inquiryType")}
+                  onBlur={() => setActiveField(null)}
+                  required
+                  className="w-full bg-transparent py-4 text-2xl md:text-4xl font-bold text-black focus:outline-none appearance-none cursor-pointer"
+                >
+                  <option value="" disabled></option>
+                  <option value="Software Development">
+                    Software Development
+                  </option>
+                  <option value="Film Production">Film Production</option>
+                  <option value="Marketing">Marketing</option>
+                </select>
+                {/* Custom Chevron for style consistency */}
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-red-600">
+                  <FaChevronDown size={20} />
+                </div>
+              </div>
+            </div>
+
+            {/* 05 Message */}
             <div
               className={`relative border-b-2 transition-colors duration-500 ${
                 activeField === "message" ? "border-red-600" : "border-gray-200"
@@ -205,7 +255,7 @@ export default function ContactPage({ cta }: { cta: any }) {
                     : "top-4 text-gray-400"
                 }`}
               >
-                04 / Project Details
+                05 / Project Details
               </label>
               <textarea
                 name="message"
@@ -225,7 +275,6 @@ export default function ContactPage({ cta }: { cta: any }) {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                // UPDATED: Added rounded-2xl to the button class
                 className="group relative inline-flex h-20 md:h-24 w-full items-center justify-between px-8 md:px-12 overflow-hidden bg-black text-white hover:bg-red-600 transition-colors duration-500 rounded-2xl"
               >
                 <span className="relative z-10 text-xl md:text-2xl font-bold tracking-wide flex items-center gap-4">
@@ -255,6 +304,22 @@ export default function ContactPage({ cta }: { cta: any }) {
           </form>
         </div>
       </div>
+
+      {/* --- NEW: MAP SECTION --- */}
+      <section className="w-full h-[50vh] min-h-[400px] relative bg-zinc-100 overflow-hidden group p-10 mt-10 ">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19859.6385288764!2d-0.03525286520666015!3d51.50495392663673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487602b9e6e44c29%3A0x621578336338e55e!2sCanary%20Wharf%2C%20London%2C%20UK!5e0!3m2!1sen!2sin!4v1709730000000!5m2!1sen!2sin"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen={true}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-full object-cover grayscale invert-[.05] transition-all duration-700 rounded-2xl ease-in-out group-hover:grayscale-0 group-hover:invert-0"
+        ></iframe>
+
+        {/* Optional: Overlay Text/Badge */}
+      </section>
 
       <CTASection data={cta} />
     </main>

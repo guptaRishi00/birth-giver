@@ -143,11 +143,12 @@ export default function IntroSection({ data }: any) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
+                className=""
               >
                 <Link
                   href={data?.link?.path || "#"}
-                  // UPDATED CTA STYLE
-                  className="bg-white text-black border border-gray-300 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl hover:bg-red-600 hover:text-white hover:border-red-600 transition-all inline-flex items-center group"
+                  // UPDATED: Added duration-300 to fix delayed text color feel
+                  className="bg-white text-black border border-gray-300 px-8 py-4 rounded-2xl font-semibold text-lg hover:shadow-xl hover:bg-red-600 hover:text-white hover:border-red-600 transition-all duration-300 inline-flex items-center group"
                 >
                   {data?.link?.name || "View Our Projects"}
                   <FiArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

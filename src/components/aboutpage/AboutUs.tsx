@@ -183,7 +183,7 @@ export default function AboutUs({
             </motion.div>
           </div>
 
-          {/* Highlights Grid */}
+          {/* Highlights Grid - UPDATED TO MATCH CAREERS CULTURE CARDS */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
             {highlights?.map((highlight: any, index: number) => (
               <motion.div
@@ -192,23 +192,29 @@ export default function AboutUs({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 h-full flex flex-col"
+                className="group relative bg-zinc-50 h-full p-8 md:p-10 flex flex-col justify-between hover:bg-white hover:shadow-xl transition-all duration-500 min-h-[300px] rounded-3xl border border-zinc-100"
               >
-                <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center mb-5 shrink-0">
-                  <SafeImage
-                    url={highlight.image?.url}
-                    alt={highlight.title || "icon"}
-                    width={24}
-                    height={24}
-                    className="w-6 h-6 text-red-500"
-                  />
+                <div className="mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 flex items-center justify-center mb-6 group-hover:border-red-600 transition-colors duration-300 shadow-sm shrink-0">
+                    <SafeImage
+                      url={highlight.image?.url}
+                      alt={highlight.title || "icon"}
+                      width={24}
+                      height={24}
+                      className="w-6 h-6 text-red-500"
+                    />
+                  </div>
+                  <h5 className="text-xl font-bold text-zinc-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                    {highlight.title}
+                  </h5>
+                  <p className="text-zinc-500 text-sm leading-relaxed">
+                    {highlight.description}
+                  </p>
                 </div>
-                <h5 className="text-xl font-bold text-gray-900 mb-3">
-                  {highlight.title}
-                </h5>
-                <p className="text-gray-600 leading-relaxed text-sm md:text-base flex-grow">
-                  {highlight.description}
-                </p>
+                {/* Decorative corner */}
+                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -348,7 +354,7 @@ export default function AboutUs({
                         {member.skills.map((skill: any) => (
                           <span
                             key={skill.id}
-                            className="px-5 py-2 bg-white border border-zinc-200 text-zinc-700 rounded-full text-sm font-medium hover:border-red-500 hover:text-red-600 transition-colors duration-300 shadow-sm"
+                            className="px-5 py-2 bg-white border border-zinc-200 text-zinc-700 rounded-2xl text-sm font-medium hover:border-red-500 hover:text-red-600 transition-colors duration-300 shadow-sm"
                           >
                             {skill.name}
                           </span>

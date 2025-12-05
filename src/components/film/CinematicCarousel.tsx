@@ -23,7 +23,7 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
   const [openTitle, setOpenTitle] = useState<string | undefined>(undefined);
 
   // 1. Configure Auto-play: 4000ms (4 seconds) delay
-  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }));
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: false }));
 
   useEffect(() => {
     if (!api) return;
@@ -42,6 +42,12 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
     title: string
   ) => {
     e.stopPropagation();
+
+    // FIX: Stop autoplay when "Watch Now" is clicked/tapped
+    if (plugin.current) {
+      plugin.current.stop();
+    }
+
     if (videoUrl) {
       setOpenVideoUrl(videoUrl);
       setOpenTitle(title);
@@ -72,7 +78,9 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
             loop: true,
           }}
           className="w-full"
+          // Stop on hover
           onMouseEnter={() => plugin.current.stop()}
+          // Resume on hover leave
           onMouseLeave={() => plugin.current.play()}
         >
           {/* Zero Gap Layout */}
@@ -130,7 +138,7 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
                             onClick={(e) =>
                               handleStreamClick(e, project.link, project.title)
                             }
-                            className="group bg-white text-black hover:bg-zinc-200 transition-all duration-300 px-8 py-3.5 rounded-full font-bold text-sm md:text-base inline-flex items-center gap-3 shadow-lg hover:shadow-xl hover:scale-105"
+                            className="group bg-white text-black hover:bg-zinc-200 transition-all duration-300 px-8 py-3.5 rounded-2xl font-bold text-sm md:text-base inline-flex items-center gap-3 shadow-lg hover:shadow-xl hover:scale-105"
                           >
                             <FaPlay className="w-3 h-3" />
                             <span>Watch Now</span>

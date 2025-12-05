@@ -22,7 +22,7 @@ export default function Services({ data }: any) {
   if (!data?.cards) return null;
 
   return (
-    <section className="w-full py-16 bg-gray-50 lg:mt-10">
+    <section className="w-full py-10 bg-gray-50 lg:mt-10">
       <div className="max-w-8xl mx-auto px-4 md:px-8">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-4">
@@ -64,7 +64,7 @@ export default function Services({ data }: any) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="group relative h-[500px] w-full overflow-hidden rounded-3xl shadow-xl cursor-pointer"
+                className="group relative h-[500px] w-full overflow-hidden rounded-3xl cursor-pointer"
               >
                 {/* 1. Background Image with Zoom Effect */}
                 <div className="absolute inset-0 w-full h-full">
@@ -107,7 +107,7 @@ export default function Services({ data }: any) {
                     <div className="mt-6 pointer-events-auto">
                       <Link
                         href={card.link?.path || "#"}
-                        className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-red-600/30"
+                        className="inline-flex items-center bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-3 px-6 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-red-600/30"
                       >
                         <span className="mr-2">
                           {card.link?.name || "Learn More"}

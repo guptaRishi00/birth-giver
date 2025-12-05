@@ -129,10 +129,12 @@ export default async function BlogPage() {
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group"
+                    // UPDATED: Changed block to flex flex-col h-full to make cards equal height
+                    className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group"
                   >
                     {/* Post Image */}
-                    <div className="relative w-full h-64 overflow-hidden">
+                    {/* UPDATED: Added shrink-0 to prevent image sizing issues */}
+                    <div className="relative w-full h-64 overflow-hidden shrink-0">
                       {post.image && post.image.url ? (
                         <Image
                           width={200}
@@ -147,7 +149,8 @@ export default async function BlogPage() {
                     </div>
 
                     {/* Post Content */}
-                    <div className="p-6">
+                    {/* UPDATED: Added flex flex-col flex-grow to layout content and push footer down */}
+                    <div className="p-6 flex flex-col flex-grow">
                       <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight">
                         {post.title}
                       </h3>
@@ -160,7 +163,8 @@ export default async function BlogPage() {
                       </p>
 
                       {/* Read More Button */}
-                      <button className="border border-gray-300 bg-transparent text-gray-900 px-6 py-3 rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium mb-6">
+                      {/* UPDATED: Added mt-auto to push button and metadata to bottom */}
+                      <button className="mt-auto border border-gray-300 w-fit bg-transparent text-gray-900 px-6 py-3 rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium mb-6">
                         Read More
                       </button>
 

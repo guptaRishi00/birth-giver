@@ -86,13 +86,13 @@ export default function CTASection({ data }: any) {
                 className={`relative group p-8 md:p-6 lg:p-8 rounded-3xl border transition-all duration-500
                   ${
                     isContactCard
-                      ? "bg-gradient-to-br from-neutral-900 to-neutral-800 border-red-500/50 hover:border-red-500"
+                      ? "bg-linear-to-br from-neutral-900 to-neutral-800 border-red-500/50 hover:border-red-500"
                       : "bg-neutral-900/50 border-red-500/50 hover:border-red-500 hover:bg-neutral-900"
                   }
                   backdrop-blur-sm shadow-2xl hover:shadow-red-900/20 hover:-translate-y-2
                 `}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
 
                 <div className="relative z-10 flex flex-col items-center text-center h-full">
                   <div
@@ -112,7 +112,7 @@ export default function CTASection({ data }: any) {
                     {card.title}
                   </h3>
 
-                  <p className="text-gray-400 leading-relaxed mb-8 whitespace-pre-line text-sm md:text-base break-words w-full">
+                  <p className="text-gray-400 leading-relaxed mb-8 whitespace-pre-line text-sm md:text-base wrap-break-words w-full">
                     {card.subtitle}
                   </p>
 
@@ -123,7 +123,7 @@ export default function CTASection({ data }: any) {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         // UPDATED CTA STYLE
-                        className="group/btn relative overflow-hidden rounded-full bg-white text-black border border-gray-300 px-8 py-3 font-bold text-sm transition-all hover:bg-red-600 hover:text-white hover:border-red-600 flex items-center gap-2"
+                        className="group/btn relative overflow-hidden rounded-2xl bg-white text-black border border-gray-300 px-8 py-3 font-bold text-sm transition-all hover:bg-red-600 hover:text-white hover:border-red-600 flex items-center gap-2"
                       >
                         <span>Get Your Quote</span>
                         <FaArrowRight className="-rotate-45 group-hover/btn:rotate-0 transition-transform duration-300" />

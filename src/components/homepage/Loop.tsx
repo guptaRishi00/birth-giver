@@ -127,35 +127,6 @@ export default function Loop({ data }: any) {
             );
           })}
         </div>
-
-        <div className="relative">
-          <div className="text-center mb-8">
-            <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-              {data.brandsTitle}
-            </h3>
-          </div>
-
-          <div
-            className="relative overflow-hidden rounded-2xl bg-white "
-            style={{ height: 210 }}
-          >
-            <div className="absolute inset-0  dark:from-gray-800 dark:to-gray-700 opacity-50"></div>
-            <div className="relative z-10 h-full flex items-center">
-              <div className="opacity-90 hover:opacity-100 transition-opacity duration-300">
-                <LogoLoop
-                  logos={logos}
-                  speed={50}
-                  direction="left"
-                  logoHeight={50}
-                  gap={60}
-                  pauseOnHover
-                  fadeOut
-                  ariaLabel="Collaborated brands"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
