@@ -7,14 +7,13 @@ import {
   getProject,
 } from "@/data/loader";
 import { getStrapiMedia } from "@/lib/utils";
-import { FaFilm } from "react-icons/fa"; // Removed FaArrowRight (now in ServiceCard)
+import { FaFilm } from "react-icons/fa";
 import LogoLoop from "@/components/homepage/LogoLoop";
 import CTASectionTwo from "@/components/CTASectionTwo";
 import CinematicCarousel from "@/components/film/CinematicCarousel";
 import ServiceCard from "@/components/film/ServiceCard";
 
 export default async function FilmProductionPage() {
-  // ... [Your existing data fetching code - NO CHANGE] ...
   const globalResponse = await getGlobalData();
   const cta = globalResponse?.data?.cta?.[0];
 
@@ -104,9 +103,11 @@ export default async function FilmProductionPage() {
       </section>
 
       {/* 2. SERVICES SECTION */}
-      <section className="relative w-full py-32 bg-white">
+      {/* UPDATED: py-32 -> py-10 */}
+      <section className="relative w-full py-10 bg-white">
         <div className="max-w-screen-2xl mx-auto">
-          <div className="flex flex-col px-6 md:px-12 lg:flex-row justify-between items-end mb-20 border-b border-zinc-200 pb-10">
+          {/* UPDATED: mb-20 -> mb-12 */}
+          <div className="flex flex-col px-6 md:px-12 lg:flex-row justify-between items-end mb-12 border-b border-zinc-200 pb-10">
             <div className="max-w-5xl">
               <span className="text-red-600 font-mono text-xs font-bold uppercase tracking-widest mb-4 block">
                 What We Do
@@ -129,7 +130,6 @@ export default async function FilmProductionPage() {
             {subServices.map((service: any, index: number) => {
               const imageUrl = getStrapiMedia(service.image?.url);
 
-              // 2. UPDATED TO USE COMPONENT WITH POPUP
               return (
                 <ServiceCard
                   key={service.id || index}
@@ -145,9 +145,10 @@ export default async function FilmProductionPage() {
       {/* 3. NEW CINEMATIC CAROUSEL (NO CHANGE) */}
       <CinematicCarousel projects={projects} />
 
-      {/* 4. BRANDS LOOP (NO CHANGE) */}
+      {/* 4. BRANDS LOOP */}
       {logos.length > 0 && (
-        <section className="w-full py-24">
+        // UPDATED: py-24 -> py-10
+        <section className="w-full py-10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
             <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-12">
               Our Brand Partners

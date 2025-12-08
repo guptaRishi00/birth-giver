@@ -95,10 +95,13 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
                 >
                   <div
                     className={cn(
-                      "relative h-[60vh] md:h-[80vh] w-full rounded-3xl overflow-hidden transform transition-all duration-700 shadow-2xl bg-black",
+                      // UPDATED: Removed 'shadow-2xl' and 'bg-black'
+                      "relative h-[60vh] md:h-[80vh] w-full rounded-3xl overflow-hidden transform transition-all duration-700",
                       isActive
-                        ? "scale-100 opacity-100 shadow-black/30 z-10"
-                        : "scale-[0.92] opacity-50 grayscale-[30%] blur-[1px] z-0"
+                        ? // UPDATED: Removed 'shadow-black/30'
+                          "scale-100 opacity-100 z-10"
+                        : // UPDATED: Removed 'grayscale-[30%]' to prevent grey tint
+                          "scale-[0.92] opacity-50 blur-[1px] z-0"
                     )}
                   >
                     {/* Background Image */}
