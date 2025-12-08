@@ -107,10 +107,10 @@ export default function AboutUs({
               {herosectionData?.description}
             </motion.p>
 
-            <div className="flex items-center gap-4 text-white/60 text-xs font-mono uppercase tracking-widest">
+            {/* <div className="flex items-center gap-4 text-white/60 text-xs font-mono uppercase tracking-widest">
               <span>Scroll to Explore</span>
               <div className="h-px w-12 bg-white/40"></div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
