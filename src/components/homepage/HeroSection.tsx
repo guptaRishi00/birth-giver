@@ -38,7 +38,7 @@ export default function HeroSection({ data }: any) {
 
       {/* Cinematic Gradient Overlay */}
       {/* Dark floor for text, clear top for video visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black z-10" />
 
       {/* Content Container */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
@@ -61,7 +61,7 @@ export default function HeroSection({ data }: any) {
           {/* Main Title */}
           <motion.h1
             variants={itemVariants}
-            className="text-white text-5xl sm:text-7xl md:text-9xl font-black mb-6 tracking-tighter uppercase drop-shadow-xl"
+            className="text-white text-5xl sm:text-7xl md:text-9xl font-black mb-6 tracking-tighter drop-shadow-xl"
           >
             {data?.title || "Limitless"}
           </motion.h1>
