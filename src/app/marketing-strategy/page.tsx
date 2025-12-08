@@ -97,20 +97,17 @@ export default async function MarketingStrategyPage() {
             <p className="text-gray-200 text-lg md:text-xl max-w-2xl leading-relaxed">
               {heroDesc}
             </p>
-
-            {/* <div className="flex items-center gap-4 text-white/60 text-xs font-mono uppercase tracking-widest">
-              <span>Scroll to Analyze</span>
-              <div className="h-px w-12 bg-white/40"></div>
-            </div> */}
           </div>
         </div>
       </section>
 
       {/* --- 2. Strategic Services --- */}
-      <section className="relative w-full py-24 bg-white">
+      {/* UPDATED: py-24 -> py-10 to match Film Page */}
+      <section className="relative w-full py-10 bg-white">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
-          <div className="flex flex-col px-6 md:px-12 md:flex-row justify-between items-end mb-16 border-b border-zinc-200 pb-8">
+          {/* UPDATED: mb-16 -> mb-12 and pb-8 -> pb-10 */}
+          <div className="flex flex-col px-6 md:px-12 md:flex-row justify-between items-end mb-12 border-b border-zinc-200 pb-10">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">
                 {marketingServiceData?.title || "Strategic Channels"}
@@ -150,7 +147,8 @@ export default async function MarketingStrategyPage() {
 
       {/* --- 3. Our Brands (Collaborative Partners) --- */}
       {logos.length > 0 && (
-        <section className="w-full py-24">
+        // UPDATED: py-24 -> py-10 to match Film Page
+        <section className="w-full py-10">
           <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
             <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-12">
               Our Brand Partners

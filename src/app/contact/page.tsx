@@ -282,7 +282,7 @@ export default function ContactPage({ cta }: { cta: any }) {
                   {status === "submitting" ? "Processing..." : "Send Message"}
                 </span>
 
-                <div className="relative z-10 w-12 h-12 md:w-16 md:h-16 bg-white text-black rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-45 group-hover:scale-110">
+                <div className="relative z-10 w-12 h-12 md:w-16 md:h-16 bg-white text-black rounded-full flex items-center justify-center transition-transform duration-500 group-hover:-rotate-45 group-hover:scale-110">
                   {status === "success" ? (
                     <FaPaperPlane className="w-5 h-5" />
                   ) : (

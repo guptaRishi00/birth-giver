@@ -160,7 +160,7 @@ export default function ProjectPage({
                       </div>
 
                       {/* B. Title (SECOND) */}
-                      <h3 className="text-xl md:text-3xl font-bold text-white tracking-wide drop-shadow-md leading-tight text-left">
+                      <h3 className="text-xl md:text-xl font-bold text-white tracking-wide drop-shadow-md leading-tight text-left">
                         {project.title}
                       </h3>
                     </div>
