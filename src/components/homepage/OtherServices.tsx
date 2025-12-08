@@ -82,7 +82,7 @@ const ContactModal = ({
   </AnimatePresence>
 );
 
-// Service Card (Unchanged)
+// Service Card (Updated to match standard button style)
 const ServiceCard = ({ service }: { service: any }) => (
   <div className="group relative bg-white p-8 h-full border-r border-gray-100 min-w-[300px] md:min-w-[400px] flex flex-col justify-between hover:bg-red-50/30 transition-colors duration-300">
     <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-red-600 transition-colors duration-300" />
@@ -99,11 +99,11 @@ const ServiceCard = ({ service }: { service: any }) => (
     </div>
     <Link
       href={service.link?.path || "#"}
-      className="flex items-center text-red-600 font-medium group-hover:text-red-700 transition-colors duration-300 mt-auto text-sm"
+      className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 bg-transparent border border-red-600 text-red-600 hover:bg-red-600 hover:text-white hover:shadow-lg hover:-translate-y-1 mt-auto w-fit"
     >
-      <span className="mr-2">{service.link?.name || "Learn More"}</span>
+      <span>{service.link?.name || "Learn More"}</span>
       <svg
-        className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300"
+        className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -229,10 +229,10 @@ export default function OtherServices({ data, readyData }: any) {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                {/* Primary Button - UPDATED STYLE */}
+                {/* Primary Button - UPDATED STYLE (Outline Red to match IntroSection) */}
                 <button
                   onClick={() => setIsPopupOpen(true)}
-                  className="group relative inline-flex items-center justify-center bg-white text-black border border-gray-300 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-red-600 hover:text-white hover:border-red-600 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] cursor-pointer hover:-translate-y-1"
+                  className="group relative inline-flex items-center justify-center bg-transparent text-white border border-red-600 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-red-600 hover:text-white hover:border-red-600 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] cursor-pointer hover:-translate-y-1"
                 >
                   <span className="mr-2">
                     {readyData?.quote?.name || "Get Your Quote"}
@@ -240,10 +240,10 @@ export default function OtherServices({ data, readyData }: any) {
                   <BsArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
 
-                {/* Secondary Button */}
+                {/* Secondary Button - UPDATED STYLE (White Outline for Secondary) */}
                 <button
                   onClick={() => setIsPopupOpen(true)}
-                  className="group inline-flex items-center justify-center bg-transparent border border-red-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-red-600 cursor-pointer hover:border-red-600"
+                  className="group inline-flex items-center justify-center bg-transparent border border-white/20 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-white/10 cursor-pointer hover:border-white/40"
                 >
                   <BsTelephone className="w-5 h-5 mr-2 text-gray-400 group-hover:text-white transition-colors" />
                   <span>Contact Us</span>
