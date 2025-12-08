@@ -137,10 +137,12 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 2. Company Culture (Rounded Cards with Icons) --- */}
-      <section className="relative w-full px-6 md:px-12 py-24 bg-white">
+      {/* UPDATED: py-24 -> py-10 */}
+      <section className="relative w-full px-6 md:px-12 py-10 bg-white">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-zinc-200 pb-8">
+          {/* UPDATED: mb-16 -> mb-12 */}
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-zinc-200 pb-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">
                 {careersBlock?.culture?.title || "Our Culture"}
@@ -191,9 +193,11 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 3. Job Openings (Clean List Layout) --- */}
-      <section className="w-full px-6 md:px-12 py-24 bg-white">
+      {/* UPDATED: py-24 -> py-10 */}
+      <section className="w-full px-6 md:px-12 py-10 bg-white">
         <div className="max-w-screen-xl mx-auto">
-          <div className="text-center mb-16">
+          {/* UPDATED: mb-16 -> mb-12 */}
+          <div className="text-center mb-12">
             <span className="text-red-600 font-mono text-xs uppercase tracking-widest mb-4 block">
               Join the Team
             </span>
@@ -285,7 +289,8 @@ export default function CareersPage({ careersBlock, cta }: any) {
                       </div>
                     </div>
 
-                    <button className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-black border border-red-600 font-bold uppercase tracking-widest text-xs rounded-2xl hover:bg-red-600 hover:text-white cursor-pointer transition-colors duration-300 hover:shadow-red-600/20">
+                    {/* UPDATED: text-black -> text-red-600 to match brand outline style */}
+                    <button className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-red-600 border border-red-600 font-bold uppercase tracking-widest text-xs rounded-2xl hover:bg-red-600 hover:text-white cursor-pointer transition-colors duration-300 hover:shadow-red-600/20">
                       Apply Now <FaArrowRight />
                     </button>
                   </div>
@@ -297,9 +302,11 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 4. Perks & Benefits (Rounded Grid with Icons) --- */}
-      <section className="relative w-full px-6 md:px-12 py-24 bg-zinc-50 border-t border-zinc-100">
+      {/* UPDATED: py-24 -> py-10 */}
+      <section className="relative w-full px-6 md:px-12 py-10 bg-zinc-50 border-t border-zinc-100">
         <div className="max-w-screen-2xl mx-auto">
-          <div className="mb-16">
+          {/* UPDATED: mb-16 -> mb-12 */}
+          <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
               {careersBlock?.gain?.title || "Why Join Us?"}
             </h2>
@@ -330,9 +337,11 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 5. Application Process (Numbered Grid) --- */}
-      <section className="w-full px-6 md:px-12 py-24 bg-zinc-900 text-white">
+      {/* UPDATED: py-24 -> py-10 */}
+      <section className="w-full px-6 md:px-12 py-10 bg-zinc-900 text-white">
         <div className="max-w-screen-2xl mx-auto">
-          <div className="mb-16 border-b border-white/10 pb-8">
+          {/* UPDATED: mb-16 -> mb-12 */}
+          <div className="mb-12 border-b border-white/10 pb-8">
             <h2 className="text-4xl font-bold mb-4">
               {careersBlock?.apply?.title || "How It Works"}
             </h2>

@@ -26,7 +26,7 @@ export default function ProjectPage({
   return (
     <div>
       {/* =========================================
-          1. CINEMATIC HERO SECTION (UPDATED)
+          1. CINEMATIC HERO SECTION
       ========================================= */}
       {showHero && (
         <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 overflow-hidden bg-black">
@@ -83,8 +83,9 @@ export default function ProjectPage({
         </section>
       )}
 
-      {/* --- Projects Grid (Unchanged) --- */}
-      <div className="w-full px-4 md:px-20 py-16 bg-white">
+      {/* --- Projects Grid --- */}
+      {/* UPDATED: Changed padding from py-16 to py-10 for consistency */}
+      <div className="w-full px-4 md:px-20 py-10 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">

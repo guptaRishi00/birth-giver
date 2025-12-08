@@ -33,11 +33,13 @@ export default async function BlogPage() {
 
   return (
     <div className="min-h-screen bg-gray-950">
-      <div className="w-full px-4 md:px-20 py-16">
+      {/* UPDATED: py-16 -> py-10 */}
+      <div className="w-full px-4 md:px-20 py-10">
         <div className="max-w-7xl mx-auto">
           {/* Featured Post Section */}
           {featuredPost && (
-            <div className="mb-20">
+            // UPDATED: mb-20 -> mb-12
+            <div className="mb-12">
               {/* Featured Post Header */}
               <div className="flex items-center mb-8">
                 <h2 className="text-4xl md:text-5xl font-bold text-white uppercase tracking-wide">
@@ -58,8 +60,8 @@ export default async function BlogPage() {
                 <div className="relative w-full h-80 md:h-96 overflow-hidden">
                   {featuredPost.image && featuredPost.image.url ? (
                     <Image
-                      width={200}
-                      height={200}
+                      width={1200}
+                      height={800}
                       src={featuredPost.image.url}
                       alt={featuredPost.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -107,8 +109,9 @@ export default async function BlogPage() {
                   </p>
 
                   {/* Read More Button (UPDATED) */}
+                  {/* Changed rounded-md to rounded-lg to match consistent card styling */}
                   <button
-                    className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-md font-bold uppercase tracking-widest text-xs transition-all duration-300 
+                    className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 
                     bg-transparent border border-red-600 text-red-600 
                     hover:bg-red-600 hover:text-white hover:shadow-lg hover:-translate-y-1"
                   >
@@ -146,8 +149,8 @@ export default async function BlogPage() {
                     <div className="relative w-full h-64 overflow-hidden shrink-0">
                       {post.image && post.image.url ? (
                         <Image
-                          width={200}
-                          height={200}
+                          width={600}
+                          height={400}
                           src={post.image.url}
                           alt={post.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -171,9 +174,10 @@ export default async function BlogPage() {
                       </p>
 
                       {/* Read More Button (UPDATED) */}
+                      {/* Changed rounded-md to rounded-lg */}
                       <div className="mt-auto mb-6">
                         <button
-                          className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-md font-bold uppercase tracking-widest text-xs transition-all duration-300 
+                          className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 
                           bg-transparent border border-red-600 text-red-600 
                           hover:bg-red-600 hover:text-white hover:shadow-lg hover:-translate-y-1"
                         >

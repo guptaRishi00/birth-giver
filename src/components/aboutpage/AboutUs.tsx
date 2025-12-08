@@ -51,7 +51,6 @@ export default function AboutUs({
   const titlePart1 = parts[0] || "";
   const titlePart2 = parts[1] || "";
 
-  // 1. Safely get cards array to check length later
   const featureCards = features?.cards || [];
 
   return (
@@ -116,28 +115,30 @@ export default function AboutUs({
         </div>
       </section>
 
-      {/* --- MAIN CONTENT --- */}
+      {/* --- MAIN CONTENT WRAPPER --- */}
+      {/* UPDATED: Removed large py-16/py-24 padding here to allow sections to control their own spacing consistently */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative px-6 py-16 md:px-12 md:py-24 max-w-[1400px] mx-auto w-full"
+        className="w-full"
       >
-        {/* --- WHAT IS BGFP SECTION --- */}
-        <section className="mb-24 md:mb-32">
+        {/* --- SECTION 1: WHAT IS BGFP --- */}
+        {/* UPDATED: Added py-10 to match homepage components */}
+        <section className="w-full py-10 px-6 md:px-12 max-w-[1400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               What Is BirthGiver Film Productions?
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 items-stretch">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -183,7 +184,7 @@ export default function AboutUs({
             </motion.div>
           </div>
 
-          {/* Highlights Grid - UPDATED TO MATCH CAREERS CULTURE CARDS */}
+          {/* Highlights Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
             {highlights?.map((highlight: any, index: number) => (
               <motion.div
@@ -220,14 +221,15 @@ export default function AboutUs({
           </div>
         </section>
 
-        {/* --- WHY CHOOSE US SECTION --- */}
-        <section className="mb-24 md:mb-32">
+        {/* --- SECTION 2: WHY CHOOSE US --- */}
+        {/* UPDATED: Added py-10, removed mb-32 */}
+        <section className="w-full py-8 px-6 md:px-12 max-w-[1400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
               {titlePart1}
@@ -281,20 +283,21 @@ export default function AboutUs({
           </div>
         </section>
 
-        {/* --- MEMBERS SECTION --- */}
-        <section className="w-full">
+        {/* --- SECTION 3: MEMBERS --- */}
+        {/* UPDATED: Added py-10, removed mb-32 */}
+        <section className="w-full py-10 px-6 md:px-12 max-w-[1400px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-24 border-b border-zinc-200 pb-10"
+            className="mb-12 border-b border-zinc-200 pb-10"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-zinc-900">
               The Minds Behind the Magic.
             </h2>
           </motion.div>
 
-          <div className="flex flex-col gap-32">
+          <div className="flex flex-col gap-24">
             {members?.map((member: any, index: number) => (
               <motion.div
                 key={member.id}
@@ -306,7 +309,7 @@ export default function AboutUs({
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 } items-center gap-12 lg:gap-24`}
               >
-                {/* Image Side - UPDATED: Index 1+ is now aspect-[6/7] */}
+                {/* Image Side */}
                 <div className="w-full lg:w-1/2">
                   <div className="relative group">
                     <div
