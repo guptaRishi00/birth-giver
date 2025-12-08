@@ -145,6 +145,9 @@ export default async function MarketingStrategyPage() {
         </div>
       </section>
 
+      {/* --- 4. Our Latest Projects --- */}
+      <CinematicCarousel projects={projects} />
+
       {/* --- 3. Our Brands (Collaborative Partners) --- */}
       {logos.length > 0 && (
         <section className="w-full py-24">
@@ -165,9 +168,6 @@ export default async function MarketingStrategyPage() {
           </div>
         </section>
       )}
-
-      {/* --- 4. Our Latest Projects --- */}
-      <CinematicCarousel projects={projects} />
 
       <CTASectionTwo />
     </main>

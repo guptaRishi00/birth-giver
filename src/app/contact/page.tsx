@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import CTASection from "@/components/CTASection";
 import { FaArrowRight, FaPaperPlane, FaChevronDown } from "react-icons/fa";
+import CTASectionTwo from "@/components/CTASectionTwo";
 
 export default function ContactPage({ cta }: { cta: any }) {
   const [form, setForm] = useState({
@@ -321,7 +322,7 @@ export default function ContactPage({ cta }: { cta: any }) {
         {/* Optional: Overlay Text/Badge */}
       </section>
 
-      <CTASection data={cta} />
+      <CTASectionTwo />
     </main>
   );
 }

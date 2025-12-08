@@ -224,7 +224,7 @@ export default function OtherServices({ data, readyData }: any) {
               />
               {/* Dark Overlay because text is white. 
                   Adjust 'bg-black/80' to 'bg-black/60' if you want image to be brighter. */}
-              <div className="absolute inset-0 bg-black/70" />
+              <div className="absolute inset-0 bg-black/35" />
             </div>
 
             {/* Background Decor: Red Glows (Kept, but on top of image/overlay) */}
@@ -239,7 +239,7 @@ export default function OtherServices({ data, readyData }: any) {
                 {readyData?.title || "Ready to bring your vision to life?"}
               </h3>
 
-              <p className="mb-10 max-w-2xl text-lg text-gray-400">
+              <p className="mb-10 max-w-2xl text-lg text-white">
                 {readyData?.description ||
                   "Join hundreds of satisfied clients. Let's create something extraordinary together."}
               </p>
@@ -259,15 +259,15 @@ export default function OtherServices({ data, readyData }: any) {
                 {/* Secondary Button */}
                 <button
                   onClick={() => setIsPopupOpen(true)}
-                  className="group inline-flex items-center justify-center bg-transparent border border-white/20 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-white/10 cursor-pointer hover:border-white/40"
+                  className="group inline-flex items-center justify-center bg-transparent border border-white/50 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-black cursor-pointer hover:border-white/40"
                 >
-                  <BsTelephone className="w-5 h-5 mr-2 text-gray-400 group-hover:text-white transition-colors" />
+                  <BsTelephone className="w-5 h-5 mr-2 text-gray-400 group-hover:text-black transition-colors" />
                   <span>Contact Us</span>
                 </button>
               </div>
 
               {/* Trust Indicators */}
-              <div className="mt-8 flex items-center justify-center space-x-6 text-sm text-gray-500">
+              <div className="mt-8 flex items-center justify-center space-x-6 text-sm text-white">
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
                   Fast Response

@@ -22,6 +22,7 @@ import {
 import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import Link from "next/link";
+import CTASectionTwo from "../CTASectionTwo";
 
 // Icon mapping function
 const getIconForCard = (
@@ -370,9 +371,8 @@ export default function CareersPage({ careersBlock, cta }: any) {
             ))}
           </div>
         </div>
+        <CTASectionTwo />
       </section>
-
-      <CTASection data={cta} />
     </div>
   );
 }

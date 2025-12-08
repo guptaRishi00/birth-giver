@@ -6,7 +6,8 @@ import CTASection from "@/components/CTASection";
 import Link from "next/link";
 import Image from "next/image";
 import VideoModal from "./VideoModal";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaPlay } from "react-icons/fa";
+import CTASectionTwo from "../CTASectionTwo";
 
 export default function ProjectPage({
   cta,
@@ -42,7 +43,7 @@ export default function ProjectPage({
               <source src="/about.mp4" type="video/mp4" />
             </video>
             {/* Gradient for text readability */}
-            <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
           </div>
 
           {/* Hero Content */}
@@ -73,20 +74,14 @@ export default function ProjectPage({
                 Discover our portfolio of creative projects and see the impact
                 of our work.
               </motion.p>
-
-              {/* <div className="flex items-center gap-4 text-white/60 text-xs font-mono uppercase tracking-widest">
-                <span>Scroll to View</span>
-                <div className="h-px w-12 bg-white/40"></div>
-              </div> */}
             </div>
           </div>
         </section>
       )}
 
       {/* --- Projects Grid --- */}
-      {/* UPDATED: Changed padding from py-16 to py-10 for consistency */}
-      <div className="w-full px-4 md:px-20 py-10 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <div className="w-full px-4 md:px-10 py-10 bg-white">
+        <div className="w-full mx-auto">
           <div className="mb-12 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
               {heading}
@@ -105,7 +100,7 @@ export default function ProjectPage({
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {displayedProjects.map((project: any) => {
                 const hasLink = project.link && project.link.trim().length > 0;
 
@@ -119,60 +114,55 @@ export default function ProjectPage({
                         setOpenTitle(project.title);
                       }
                     }}
-                    className={`group flex flex-col items-center text-left focus:outline-none ${
-                      hasLink ? "cursor-pointer" : "cursor-default opacity-80"
+                    // GROUP for hover effects
+                    className={`group relative w-full aspect-video rounded-3xl overflow-hidden text-left focus:outline-none transition-all duration-500 ${
+                      hasLink ? "cursor-pointer" : "cursor-default"
                     }`}
                   >
-                    {/* Media Container */}
-                    <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-gray-900 shadow-sm group-hover:shadow-xl transition-all duration-300 ease-out">
-                      {project.image?.url ? (
-                        <Image
-                          width={1000}
-                          height={1000}
-                          src={project.image.url}
-                          alt={`${project.title} image`}
-                          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-500 bg-gray-100">
-                          No Preview
-                        </div>
-                      )}
+                    {/* 1. Background Image (Scales on Hover) */}
+                    {project.image?.url ? (
+                      <Image
+                        width={1000}
+                        height={1000}
+                        src={project.image.url}
+                        alt={`${project.title} image`}
+                        className="w-full h-full object-cover transform transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-gray-500 bg-gray-200">
+                        No Preview
+                      </div>
+                    )}
 
-                      {/* Overlay: Play Button aesthetics */}
-                      {hasLink && (
-                        <>
-                          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300" />
+                    {/* 2. Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-90" />
 
-                          {/* Centered Play Button */}
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-16 h-16 bg-black/30 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="w-8 h-8 text-white ml-1"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </div>
+                    {/* 3. Content Overlay */}
+                    {/* UPDATED: flex-row, justify-start to group them left-aligned */}
+                    <div className="absolute bottom-0 left-0 w-full p-6 md:p-10 flex flex-row items-center justify-start gap-4">
+                      {/* A. Watch Button (FIRST) */}
+                      <div className="shrink-0">
+                        {hasLink ? (
+                          <div
+                            className="inline-flex items-center gap-3 px-5 py-3 md:px-6 md:py-3 rounded-lg font-bold uppercase tracking-widest text-[10px] md:text-xs transition-all duration-300 
+                            bg-transparent border border-red-600 text-white
+                            group-hover:bg-red-600 group-hover:text-white group-hover:shadow-lg group-hover:-translate-y-1"
+                          >
+                            <FaPlay className="w-2 h-2 md:w-3 md:h-3" />
+                            <span className="hidden sm:inline">Watch Now</span>
+                            <span className="sm:hidden">Play</span>
                           </div>
-                        </>
-                      )}
-                    </div>
+                        ) : (
+                          <span className="text-white/60 text-xs font-mono uppercase tracking-widest">
+                            Soon
+                          </span>
+                        )}
+                      </div>
 
-                    {/* Text Content */}
-                    <div className="mt-6 text-center space-y-1">
-                      <h2 className="text-xl font-bold text-gray-900">
+                      {/* B. Title (SECOND) */}
+                      <h3 className="text-xl md:text-3xl font-bold text-white tracking-wide drop-shadow-md leading-tight text-left">
                         {project.title}
-                      </h2>
-                      <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest">
-                        {hasLink ? "Watch Video" : "Coming Soon"}
-                      </p>
+                      </h3>
                     </div>
                   </button>
                 );
@@ -195,7 +185,8 @@ export default function ProjectPage({
         </div>
       </div>
 
-      {showCta && <CTASection data={cta} />}
+      <CTASectionTwo />
+
       <VideoModal
         open={Boolean(openVideoUrl)}
         videoUrl={openVideoUrl}

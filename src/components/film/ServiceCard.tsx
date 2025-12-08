@@ -74,7 +74,7 @@ export default function ServiceCard({
             onClick={() => toggleModal(false)}
           />
 
-          <div className="relative bg-white w-full max-w-lg rounded-3xl p-8 md:p-10 shadow-2xl animate-in fade-in zoom-in duration-300 max-h-[90vh] overflow-y-auto">
+          <div className="relative bg-white w-full max-w-lg rounded-3xl p-8 md:p-10 shadow-2xl animate-in fade-in zoom-in duration-300 max-h-[90vh] overflow-y-auto no-scrollbar">
             <button
               onClick={() => toggleModal(false)}
               className="absolute top-6 right-6 text-zinc-400 hover:text-red-600 transition-colors"

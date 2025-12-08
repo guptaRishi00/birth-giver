@@ -6,6 +6,7 @@ import CTASection from "@/components/CTASection";
 import { getStrapiMedia } from "@/lib/utils";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
+import CTASectionTwo from "../CTASectionTwo";
 
 // --- Helper Component ---
 const SafeImage = ({
@@ -54,324 +55,326 @@ export default function AboutUs({
   const featureCards = features?.cards || [];
 
   return (
-    <div className="bg-white min-h-screen flex flex-col">
-      {/* =========================================
+    <div className="">
+      <div className="bg-white min-h-screen flex flex-col">
+        {/* =========================================
           1. CINEMATIC HERO SECTION
       ========================================= */}
-      <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 overflow-hidden bg-black">
-        {/* Background Video */}
-        <div className="absolute inset-0 w-full h-full z-0">
-          {herosectionData?.video?.url && (
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover opacity-90"
-            >
-              <source
-                src={getStrapiMedia(herosectionData.video.url) || ""}
-                type="video/mp4"
-              />
-            </video>
-          )}
-          {/* Gradient for text readability */}
-          <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-10 w-full max-w-screen-2xl mx-auto border-t border-white/20 pt-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></div>
-            <span className="text-xs font-mono uppercase tracking-widest text-white/80">
-              Who We Are
-            </span>
+        <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 overflow-hidden bg-black">
+          {/* Background Video */}
+          <div className="absolute inset-0 w-full h-full z-0">
+            {herosectionData?.video?.url && (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover opacity-90"
+              >
+                <source
+                  src={getStrapiMedia(herosectionData.video.url) || ""}
+                  type="video/mp4"
+                />
+              </video>
+            )}
+            {/* Gradient for text readability */}
+            <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
           </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tighter mb-8 text-white max-w-6xl"
-          >
-            {herosectionData?.title}
-          </motion.h1>
+          {/* Hero Content */}
+          <div className="relative z-10 w-full max-w-screen-2xl mx-auto border-t border-white/20 pt-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-3 h-3 bg-red-600 rounded-full animate-pulse shadow-[0_0_10px_rgba(220,38,38,0.8)]"></div>
+              <span className="text-xs font-mono uppercase tracking-widest text-white/80">
+                Who We Are
+              </span>
+            </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-end gap-8">
-            <motion.p
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-gray-200 text-lg md:text-xl max-w-2xl leading-relaxed"
+              transition={{ duration: 0.8 }}
+              className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tighter mb-8 text-white max-w-6xl"
             >
-              {herosectionData?.description}
-            </motion.p>
+              {herosectionData?.title}
+            </motion.h1>
 
-            {/* <div className="flex items-center gap-4 text-white/60 text-xs font-mono uppercase tracking-widest">
+            <div className="flex flex-col md:flex-row justify-between items-end gap-8">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-gray-200 text-lg md:text-xl max-w-2xl leading-relaxed"
+              >
+                {herosectionData?.description}
+              </motion.p>
+
+              {/* <div className="flex items-center gap-4 text-white/60 text-xs font-mono uppercase tracking-widest">
               <span>Scroll to Explore</span>
               <div className="h-px w-12 bg-white/40"></div>
             </div> */}
-          </div>
-        </div>
-      </section>
-
-      {/* --- MAIN CONTENT WRAPPER --- */}
-      {/* UPDATED: Removed large py-16/py-24 padding here to allow sections to control their own spacing consistently */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="w-full"
-      >
-        {/* --- SECTION 1: WHAT IS BGFP --- */}
-        {/* UPDATED: Added py-10 to match homepage components */}
-        <section className="w-full py-10 px-6 md:px-12 max-w-[1400px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              What Is BirthGiver Film Productions?
-            </h2>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 items-stretch">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col gap-8 h-full"
-            >
-              <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 flex-1 hover:shadow-xl transition-shadow duration-300">
-                <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                  <span className="w-1.5 h-8 bg-red-500 rounded-full mr-4 shrink-0"></span>
-                  {mission?.title}
-                </h4>
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {mission?.description}
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 flex-1 hover:shadow-xl transition-shadow duration-300">
-                <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                  <span className="w-1.5 h-8 bg-red-500 rounded-full mr-4 shrink-0"></span>
-                  {vision?.title}
-                </h4>
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {vision?.description}
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="bg-gradient-to-br from-red-50 to-gray-50 rounded-2xl shadow-lg p-8 lg:p-10 border border-gray-100 h-full flex flex-col justify-center"
-            >
-              <h4 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                <span className="w-1.5 h-8 bg-red-500 rounded-full mr-4 shrink-0"></span>
-                {ourStory?.title}
-              </h4>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {ourStory?.description}
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Highlights Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
-            {highlights?.map((highlight: any, index: number) => (
-              <motion.div
-                key={highlight.id || index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative bg-zinc-50 h-full p-8 md:p-10 flex flex-col justify-between hover:bg-white hover:shadow-xl transition-all duration-500 min-h-[300px] rounded-3xl border border-zinc-100"
-              >
-                <div className="mb-6">
-                  <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 flex items-center justify-center mb-6 group-hover:border-red-600 transition-colors duration-300 shadow-sm shrink-0">
-                    <SafeImage
-                      url={highlight.image?.url}
-                      alt={highlight.title || "icon"}
-                      width={24}
-                      height={24}
-                      className="w-6 h-6 text-red-500"
-                    />
-                  </div>
-                  <h5 className="text-xl font-bold text-zinc-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">
-                    {highlight.title}
-                  </h5>
-                  <p className="text-zinc-500 text-sm leading-relaxed">
-                    {highlight.description}
-                  </p>
-                </div>
-                {/* Decorative corner */}
-                <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                </div>
-              </motion.div>
-            ))}
+            </div>
           </div>
         </section>
 
-        {/* --- SECTION 2: WHY CHOOSE US --- */}
-        {/* UPDATED: Added py-10, removed mb-32 */}
-        <section className="w-full py-8 px-6 md:px-12 max-w-[1400px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              {titlePart1}
-              <span className="text-red-500 mx-2">{highlightWord}</span>
-              {titlePart2}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {features?.description}
-            </p>
-          </motion.div>
+        {/* --- MAIN CONTENT WRAPPER --- */}
+        {/* UPDATED: Removed large py-16/py-24 padding here to allow sections to control their own spacing consistently */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="w-full"
+        >
+          {/* --- SECTION 1: WHAT IS BGFP --- */}
+          {/* UPDATED: Added py-10 to match homepage components */}
+          <section className="w-full py-10 px-6 md:px-12 max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+                What Is BirthGiver Film Productions?
+              </h2>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 auto-rows-fr">
-            {featureCards.map((feature: any, index: number) => {
-              const isLastItem = index === featureCards.length - 1;
-              const isOddTotal = featureCards.length % 2 !== 0;
-              const shouldSpan = feature.span || (isLastItem && isOddTotal);
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-12 items-stretch">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex flex-col gap-8 h-full"
+              >
+                <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 flex-1 hover:shadow-xl transition-shadow duration-300">
+                  <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span className="w-1.5 h-8 bg-red-500 rounded-full mr-4 shrink-0"></span>
+                    {mission?.title}
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    {mission?.description}
+                  </p>
+                </div>
 
-              return (
+                <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 flex-1 hover:shadow-xl transition-shadow duration-300">
+                  <h4 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                    <span className="w-1.5 h-8 bg-red-500 rounded-full mr-4 shrink-0"></span>
+                    {vision?.title}
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    {vision?.description}
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="bg-gradient-to-br from-red-50 to-gray-50 rounded-2xl shadow-lg p-8 lg:p-10 border border-gray-100 h-full flex flex-col justify-center"
+              >
+                <h4 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                  <span className="w-1.5 h-8 bg-red-500 rounded-full mr-4 shrink-0"></span>
+                  {ourStory?.title}
+                </h4>
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  {ourStory?.description}
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Highlights Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+              {highlights?.map((highlight: any, index: number) => (
                 <motion.div
-                  key={feature.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  key={highlight.id || index}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: feature.delay || 0 }}
-                  className={`group relative bg-linear-to-br from-white to-gray-50 rounded-2xl border border-gray-200 p-8 hover:border-red-200 hover:shadow-lg transition-all duration-300 h-full ${
-                    shouldSpan ? "md:col-span-2" : ""
-                  }`}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group relative bg-zinc-50 h-full p-8 md:p-10 flex flex-col justify-between hover:bg-white hover:shadow-xl transition-all duration-500 min-h-[300px] rounded-3xl border border-zinc-100"
                 >
-                  <div className="absolute inset-0 bg-linear-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300 pointer-events-none" />
-
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-500 group-hover:scale-110 transition-all duration-300 shrink-0">
+                  <div className="mb-6">
+                    <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 flex items-center justify-center mb-6 group-hover:border-red-600 transition-colors duration-300 shadow-sm shrink-0">
                       <SafeImage
-                        url={feature.image?.url}
-                        alt={feature.title || "feature"}
+                        url={highlight.image?.url}
+                        alt={highlight.title || "icon"}
                         width={24}
                         height={24}
-                        className="w-6 h-6 text-red-500 group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                        className="w-6 h-6 text-red-500"
                       />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors duration-300">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed flex-grow">
-                      {feature.description}
+                    <h5 className="text-xl font-bold text-zinc-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                      {highlight.title}
+                    </h5>
+                    <p className="text-zinc-500 text-sm leading-relaxed">
+                      {highlight.description}
                     </p>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* --- SECTION 3: MEMBERS --- */}
-        {/* UPDATED: Added py-10, removed mb-32 */}
-        <section className="w-full py-10 px-6 md:px-12 max-w-[1400px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12 border-b border-zinc-200 pb-10"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-zinc-900">
-              The Minds Behind the Magic.
-            </h2>
-          </motion.div>
-
-          <div className="flex flex-col gap-24">
-            {members?.map((member: any, index: number) => (
-              <motion.div
-                key={member.id}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-                className={`flex flex-col ${
-                  index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-                } items-center gap-12 lg:gap-24`}
-              >
-                {/* Image Side */}
-                <div className="w-full lg:w-1/2">
-                  <div className="relative group">
-                    <div
-                      className={`relative w-full ${
-                        index === 0
-                          ? "aspect-[3/4] md:aspect-[4/5]"
-                          : "aspect-[4/5] md:aspect-[6/7]"
-                      } overflow-hidden rounded-2xl shadow-2xl transition-all duration-300`}
-                    >
-                      <SafeImage
-                        url={member.image?.url}
-                        alt={`${member.name}`}
-                        width={800}
-                        height={1000}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      {/* Gradient Overlay for Texture */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </div>
+                  {/* Decorative corner */}
+                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-2 h-2 bg-red-600 rounded-full"></div>
                   </div>
-                </div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
 
-                {/* Content Side */}
-                <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-                  {/* Title is now the label */}
-                  <span className="text-red-600 font-bold tracking-widest uppercase text-sm mb-4">
-                    {member.title}
-                  </span>
+          {/* --- SECTION 2: WHY CHOOSE US --- */}
+          {/* UPDATED: Added py-10, removed mb-32 */}
+          <section className="w-full py-8 px-6 md:px-12 max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                {titlePart1}
+                <span className="text-red-500 mx-2">{highlightWord}</span>
+                {titlePart2}
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                {features?.description}
+              </p>
+            </motion.div>
 
-                  {/* Name is now the main heading */}
-                  <h3 className="text-4xl md:text-6xl font-black text-zinc-900 mb-8 leading-tight">
-                    {member.name}
-                  </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 auto-rows-fr">
+              {featureCards.map((feature: any, index: number) => {
+                const isLastItem = index === featureCards.length - 1;
+                const isOddTotal = featureCards.length % 2 !== 0;
+                const shouldSpan = feature.span || (isLastItem && isOddTotal);
 
-                  <p className="text-zinc-500 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
-                    {member.description}
-                  </p>
+                return (
+                  <motion.div
+                    key={feature.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: feature.delay || 0 }}
+                    className={`group relative bg-linear-to-br from-white to-gray-50 rounded-2xl border border-gray-200 p-8  transition-all duration-300 h-full ${
+                      shouldSpan ? "md:col-span-2" : ""
+                    }`}
+                  >
+                    <div className="absolute inset-0 bg-linear-to-br  opacity-0 rounded-2xl transition-opacity duration-300 pointer-events-none" />
 
-                  {member.skills && (
-                    <div className="w-full">
-                      <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-6">
-                        Expertise
-                      </h4>
-                      <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                        {member.skills.map((skill: any) => (
-                          <span
-                            key={skill.id}
-                            className="px-5 py-2 bg-white border border-zinc-200 text-zinc-700 rounded-2xl text-sm font-medium hover:border-red-500 hover:text-red-600 transition-colors duration-300 shadow-sm"
-                          >
-                            {skill.name}
-                          </span>
-                        ))}
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 shrink-0">
+                        <SafeImage
+                          url={feature.image?.url}
+                          alt={feature.title || "feature"}
+                          width={24}
+                          height={24}
+                          className="w-6 h-6 transition-all duration-300"
+                        />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3  transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed flex-grow">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* --- SECTION 3: MEMBERS --- */}
+          {/* UPDATED: Added py-10, removed mb-32 */}
+          <section className="w-full py-10 px-6 md:px-12 max-w-[1400px] mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-12 border-b border-zinc-200 pb-10"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-zinc-900">
+                The Minds Behind the Magic.
+              </h2>
+            </motion.div>
+
+            <div className="flex flex-col gap-24">
+              {members?.map((member: any, index: number) => (
+                <motion.div
+                  key={member.id}
+                  initial={{ opacity: 0, y: 60 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8 }}
+                  className={`flex flex-col ${
+                    index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                  } items-center gap-12 lg:gap-24`}
+                >
+                  {/* Image Side */}
+                  <div className="w-full lg:w-1/2">
+                    <div className="relative group">
+                      <div
+                        className={`relative w-full ${
+                          index === 0
+                            ? "aspect-[3/4] md:aspect-[4/5]"
+                            : "aspect-[4/5] md:aspect-[6/7]"
+                        } overflow-hidden rounded-2xl shadow-2xl transition-all duration-300`}
+                      >
+                        <SafeImage
+                          url={member.image?.url}
+                          alt={`${member.name}`}
+                          width={800}
+                          height={1000}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        {/* Gradient Overlay for Texture */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
                     </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-      </motion.div>
-      <CTASection data={cta} />
+                  </div>
+
+                  {/* Content Side */}
+                  <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    {/* Title is now the label */}
+                    <span className="text-red-600 font-bold tracking-widest uppercase text-sm mb-4">
+                      {member.title}
+                    </span>
+
+                    {/* Name is now the main heading */}
+                    <h3 className="text-4xl md:text-6xl font-black text-zinc-900 mb-8 leading-tight">
+                      {member.name}
+                    </h3>
+
+                    <p className="text-zinc-500 text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+                      {member.description}
+                    </p>
+
+                    {member.skills && (
+                      <div className="w-full">
+                        <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-6">
+                          Expertise
+                        </h4>
+                        <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                          {member.skills.map((skill: any) => (
+                            <span
+                              key={skill.id}
+                              className="px-5 py-2 bg-white border border-zinc-200 text-zinc-700 rounded-2xl text-sm font-medium hover:border-red-500 hover:text-red-600 transition-colors duration-300 shadow-sm"
+                            >
+                              {skill.name}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </section>
+        </motion.div>
+      </div>
+      <CTASectionTwo />
     </div>
   );
 }

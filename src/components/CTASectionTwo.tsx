@@ -28,7 +28,7 @@ export default function CTASectionTwo() {
           />
           {/* Dark Overlay to ensure white text readability.
               Adjust 'bg-black/80' to 'bg-black/60' or 'bg-black/90' to tune brightness. */}
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/35" />
         </div>
         {/* --- BACKGROUND IMAGE SECTION END --- */}
 
@@ -47,7 +47,7 @@ export default function CTASectionTwo() {
           </h3>
 
           {/* Static Description */}
-          <p className="mb-10 max-w-2xl text-lg text-gray-400">
+          <p className="mb-10 max-w-2xl text-lg text-white">
             Join hundreds of satisfied clients. Let's create something
             extraordinary together.
           </p>
@@ -73,7 +73,7 @@ export default function CTASectionTwo() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-8 flex items-center justify-center space-x-6 text-sm text-gray-500">
+          <div className="mt-8 flex items-center justify-center space-x-6 text-sm text-white">
             <div className="flex items-center">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
               Fast Response

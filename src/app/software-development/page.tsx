@@ -146,6 +146,9 @@ export default async function SoftwareDevelopmentPage() {
         </div>
       </section>
 
+      {/* --- 4. Our Latest Projects (REPLACED WITH CAROUSEL) --- */}
+      <CinematicCarousel projects={projects} />
+
       {/* --- 3. Our Brands (Collaborative Partners) --- */}
       {logos.length > 0 && (
         <section className="w-full py-24">
@@ -166,9 +169,6 @@ export default async function SoftwareDevelopmentPage() {
           </div>
         </section>
       )}
-
-      {/* --- 4. Our Latest Projects (REPLACED WITH CAROUSEL) --- */}
-      <CinematicCarousel projects={projects} />
 
       <CTASectionTwo />
     </main>

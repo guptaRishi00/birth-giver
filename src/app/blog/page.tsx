@@ -11,6 +11,7 @@ import {
   FaImage,
   FaArrowRight,
 } from "react-icons/fa";
+import CTASectionTwo from "@/components/CTASectionTwo";
 
 export default async function BlogPage() {
   const { data: posts } = await getBlogs();
@@ -32,7 +33,7 @@ export default async function BlogPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="h-full bg-gray-950">
       {/* UPDATED: py-16 -> py-10 */}
       <div className="w-full px-4 md:px-20 py-10">
         <div className="max-w-7xl mx-auto">
@@ -216,8 +217,8 @@ export default async function BlogPage() {
             </div>
           )}
         </div>
+        <CTASectionTwo />
       </div>
-      <CTASection data={cta} />
     </div>
   );
 }
