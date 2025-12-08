@@ -22,7 +22,7 @@ export default function FooterComponent({ data }: any) {
       {/* --- Ambient Background Effects --- */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Top Border Gradient */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-900/50 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-red-900/50 to-transparent" />
 
         {/* Red Glow (Top Right) */}
         <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-red-600/10 blur-[100px]" />

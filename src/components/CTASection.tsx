@@ -112,7 +112,7 @@ export default function CTASection({ data }: any) {
                     {card.title}
                   </h3>
 
-                  <p className="text-gray-400 leading-relaxed mb-8 whitespace-pre-line text-sm md:text-base wrap-break-words w-full">
+                  <p className="text-gray-400 leading-relaxed mb-8 lg:max-w-[200px] wrap-break-word text-sm md:text-base wrap-break-words w-full">
                     {card.subtitle}
                   </p>
 
