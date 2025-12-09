@@ -14,7 +14,7 @@ import {
   BsTelephone,
 } from "react-icons/bs";
 import Link from "next/link";
-import Image from "next/image"; // <--- 1. Imported Image
+import Image from "next/image";
 
 // --- Component Helpers ---
 
@@ -83,9 +83,12 @@ const ContactModal = ({
   </AnimatePresence>
 );
 
-// Service Card (Unchanged)
+// Service Card (Updated href to /services)
 const ServiceCard = ({ service }: { service: any }) => (
-  <div className="group relative bg-white p-8 h-full border-r border-gray-100 min-w-[300px] md:min-w-[400px] flex flex-col justify-between hover:bg-red-50/30 transition-colors duration-300">
+  <Link
+    href="/services"
+    className="group relative bg-white p-8 h-full border-r border-gray-100 min-w-[300px] md:min-w-[400px] flex flex-col justify-between hover:bg-red-50/30 transition-colors duration-300 block cursor-pointer"
+  >
     <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-red-600 transition-colors duration-300" />
     <div>
       <div className="flex items-center justify-center w-14 h-14 bg-linear-to-br from-red-500 to-red-600 rounded-lg mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md">
@@ -98,10 +101,8 @@ const ServiceCard = ({ service }: { service: any }) => (
         {service.description}
       </p>
     </div>
-    <Link
-      href={service.link?.path || "#"}
-      className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 bg-transparent border border-red-600 text-red-600 hover:bg-red-600 hover:text-white hover:shadow-lg hover:-translate-y-1 mt-auto w-fit"
-    >
+    {/* Converted inner Link to div to avoid nesting links, styles remain the same */}
+    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 bg-transparent border border-red-600 text-red-600 group-hover:bg-red-600 group-hover:text-white group-hover:shadow-lg group-hover:-translate-y-1 mt-auto w-fit">
       <span>{service.link?.name || "Learn More"}</span>
       <svg
         className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
@@ -116,8 +117,8 @@ const ServiceCard = ({ service }: { service: any }) => (
           d="M9 5l7 7-7 7"
         />
       </svg>
-    </Link>
-  </div>
+    </div>
+  </Link>
 );
 
 // --- Main Component ---

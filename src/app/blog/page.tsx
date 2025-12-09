@@ -112,7 +112,7 @@ export default async function BlogPage() {
                   {/* Read More Button (UPDATED) */}
                   {/* Changed rounded-md to rounded-lg to match consistent card styling */}
                   <button
-                    className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 
+                    className="cursor-pointer group/btn inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 
                     bg-transparent border border-red-600 text-red-600 
                     hover:bg-red-600 hover:text-white hover:shadow-lg hover:-translate-y-1"
                   >
@@ -178,7 +178,7 @@ export default async function BlogPage() {
                       {/* Changed rounded-md to rounded-lg */}
                       <div className="mt-auto mb-6">
                         <button
-                          className="group/btn inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 
+                          className="cursor-pointer group/btn inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 
                           bg-transparent border border-red-600 text-red-600 
                           hover:bg-red-600 hover:text-white hover:shadow-lg hover:-translate-y-1"
                         >

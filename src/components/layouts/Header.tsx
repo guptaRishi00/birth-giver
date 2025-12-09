@@ -116,7 +116,7 @@ export default function Header({ data }: HeaderProps) {
               {link.children ? (
                 /* --- RENDER AS SPAN (UNCLICKABLE) IF CHILDREN EXIST --- */
                 <span
-                  className={`flex items-center gap-1 text-md transition-colors duration-300 cursor-default
+                  className={`flex items-center gap-1 text-sm transition-colors duration-300 cursor-default
                     ${
                       isParentActive(link.children)
                         ? "font-bold text-red-500"
