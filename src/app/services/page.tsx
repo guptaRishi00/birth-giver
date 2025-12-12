@@ -32,8 +32,30 @@ export default async function Services() {
       title: brand.name,
     })) || [];
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: herosection?.title || "Our Services",
+    description:
+      herosection?.description ||
+      "We craft digital experiences that merge art, technology, and strategy.",
+    serviceType: "General Services",
+    provider: {
+      "@type": "Organization",
+      name: "Birthgiver Film Productions",
+      url: "https://www.birthgiverfilmproductions.com",
+      logo: "https://www.birthgiverfilmproductions.com/logo.png",
+    },
+    areaServed: "Global",
+    url: "https://www.birthgiverfilmproductions.com/services",
+  };
+
   return (
     <main className="bg-white min-h-screen text-zinc-900 selection:bg-black selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       {/* --- 1. HERO SECTION --- */}
       <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 px-6 md:px-12 bg-zinc-900 overflow-hidden">
         <div className="absolute inset-0 z-0">

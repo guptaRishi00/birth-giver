@@ -62,8 +62,28 @@ export default async function SoftwareDevelopmentPage() {
     ? getStrapiMedia(herosection.video.url)
     : "/coding.mp4";
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: heroTitle,
+    description: heroDesc,
+    serviceType: "Software Development",
+    provider: {
+      "@type": "Organization",
+      name: "Birthgiver Film Productions",
+      url: "https://www.birthgiverfilmproductions.com",
+      logo: "https://www.birthgiverfilmproductions.com/logo.png",
+    },
+    areaServed: "Global",
+    url: "https://www.birthgiverfilmproductions.com/software-development",
+  };
+
   return (
     <main className="bg-white text-zinc-900 w-full min-h-screen selection:bg-red-600 selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       {/* --- 1. Cinematic Hero Section --- */}
       <section className="relative h-[90vh] w-full flex flex-col justify-end pb-12 md:pb-24 px-6 md:px-12 overflow-hidden">
         {/* Background Video */}
