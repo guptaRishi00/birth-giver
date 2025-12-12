@@ -80,10 +80,10 @@ export default function ContactPage({ cta }: { cta: any }) {
                 Direct Inquiry
               </label>
               <Link
-                href="mailto:bgfp@birthgiverfilmproduction.com"
+                href="mailto:birthgiverfilmproductions@gmail.com"
                 className="block text-xl md:text-3xl font-bold hover:text-red-600 transition-colors duration-300 break-all leading-tight"
               >
-                bgfp@birthgiverfilmproduction.com
+                birthgiverfilmproductions@gmail.com
               </Link>
             </div>
 
@@ -93,9 +93,9 @@ export default function ContactPage({ cta }: { cta: any }) {
                   Studio
                 </label>
                 <p className="text-lg font-medium text-gray-900 group-hover:translate-x-2 transition-transform duration-300">
-                  London, UK
+                  Seymour Road London,
                   <br />
-                  Canary Wharf, E14
+                  UK N8 0BH
                 </p>
               </div>
               <div className="group">

@@ -12,6 +12,8 @@ import {
   BsQuestion,
   BsArrowRight,
   BsTelephone,
+  BsEnvelope,
+  BsGeoAlt,
 } from "react-icons/bs";
 import Link from "next/link";
 import Image from "next/image";
@@ -26,7 +28,7 @@ const ICON_MAP: { [key: string]: React.ReactNode } = {
   "Digital Content Creation": <BsPhone className="w-6 h-6" />,
 };
 
-// Contact Modal (Unchanged)
+// --- Updated Contact Modal ---
 const ContactModal = ({
   isOpen,
   onClose,
@@ -42,40 +44,90 @@ const ContactModal = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4"
         onClick={onClose}
       >
         <motion.div
-          initial={{ scale: 0.9, opacity: 0, y: 20 }}
+          initial={{ scale: 0.95, opacity: 0, y: 30 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          className="bg-white rounded-2xl p-8 max-w-md w-full relative shadow-2xl"
+          exit={{ scale: 0.95, opacity: 0, y: 30 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="bg-white rounded-3xl p-8 max-w-md w-full relative shadow-2xl overflow-hidden text-center"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Close Button - Z-Index increased to 50 to ensure clickability */}
           <button
+            type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-100 rounded-full"
+            className="absolute top-5 right-5 text-gray-400 hover:text-gray-900 transition-colors p-2 hover:bg-gray-100 rounded-full z-50 cursor-pointer"
           >
             <BsX className="w-6 h-6" />
           </button>
 
-          <div className="text-center mb-6">
-            <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600">
-              <BsTelephone className="w-6 h-6" />
+          {/* Modal Content */}
+          <div className="relative z-10 flex flex-col items-center gap-6">
+            {/* Header Icon */}
+            <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center text-red-600 shadow-sm border border-red-100">
+              <BsTelephone className="w-7 h-7" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-2">
-              Get Your Quote
-            </h3>
-            <p className="text-gray-600">
-              We'll get back to you within 24 hours.
-            </p>
-          </div>
 
-          <div className="space-y-4">
-            <div className="p-4 bg-gray-50 rounded-xl text-center text-gray-500 border border-gray-100">
-              {/* Placeholder for form or contact info */}
-              <p>Contact Details / Form Area</p>
+            <div className="space-y-2">
+              <h3 className="text-2xl font-bold text-gray-900">Get in Touch</h3>
+              <p className="text-gray-500 text-sm">
+                We'd love to hear from you. Reach out to us directly or visit
+                our contact page.
+              </p>
             </div>
+
+            {/* Divider */}
+            <div className="w-full h-px bg-gray-100" />
+
+            {/* Contact Details */}
+            <div className="w-full space-y-4 text-left">
+              {/* Address */}
+              <div className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                <div className="mt-1 text-red-500">
+                  <BsGeoAlt className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">
+                    Address
+                  </p>
+                  <p className="text-gray-800 font-medium text-sm leading-relaxed">
+                    Seymour Road London,
+                    <br />
+                    UK N8 0BH
+                  </p>
+                </div>
+              </div>
+
+              {/* Email & Phone */}
+              <div className="flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors">
+                <div className="mt-1 text-red-500">
+                  <BsEnvelope className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">
+                    Contact Info
+                  </p>
+                  <p className="text-gray-800 font-medium text-sm">
+                    birthgiverfilmproductions@gmail.com
+                  </p>
+                  <p className="text-gray-800 font-medium text-sm mt-1">
+                    +44 7776 842718
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA Button to Contact Page */}
+            <Link
+              href="/contact"
+              className="w-full bg-linear-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white font-bold py-4 rounded-xl transition-all transform hover:-translate-y-0.5 hover:shadow-lg hover:shadow-red-500/30 flex items-center justify-center gap-2 group"
+            >
+              <span>Go to Contact Page</span>
+              <BsArrowRight className="group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </motion.div>
       </motion.div>
@@ -83,7 +135,7 @@ const ContactModal = ({
   </AnimatePresence>
 );
 
-// Service Card (Updated href to /services)
+// Service Card
 const ServiceCard = ({ service }: { service: any }) => (
   <Link
     href="/services"
@@ -101,7 +153,6 @@ const ServiceCard = ({ service }: { service: any }) => (
         {service.description}
       </p>
     </div>
-    {/* Converted inner Link to div to avoid nesting links, styles remain the same */}
     <div className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold uppercase tracking-widest text-xs transition-all duration-300 bg-transparent border border-red-600 text-red-600 group-hover:bg-red-600 group-hover:text-white group-hover:shadow-lg group-hover:-translate-y-1 mt-auto w-fit">
       <span>{service.link?.name || "Learn More"}</span>
       <svg
@@ -195,7 +246,6 @@ export default function OtherServices({ data, readyData }: any) {
           `}</style>
 
           <div className="flex overflow-hidden px-4 md:px-10">
-            {/* Switched from motion.div to standard div with CSS class */}
             <div className="flex gap-0 marquee-track">
               {marqueeServices.map((service, index) => (
                 <ServiceCard key={`${service.id}-${index}`} service={service} />
@@ -211,10 +261,8 @@ export default function OtherServices({ data, readyData }: any) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            // Removed 'bg-neutral-900', kept relative and overflow-hidden
             className="relative overflow-hidden rounded-[2.5rem] px-6 py-16 sm:px-16 sm:py-24"
           >
-            {/* --- NEW BACKGROUND IMAGE LOGIC --- */}
             <div className="absolute inset-0 z-0">
               <Image
                 src="/bg.jpg"
@@ -223,16 +271,9 @@ export default function OtherServices({ data, readyData }: any) {
                 className="object-cover"
                 priority
               />
-              {/* Dark Overlay because text is white. 
-                  Adjust 'bg-black/80' to 'bg-black/60' if you want image to be brighter. */}
               <div className="absolute inset-0 bg-black/35" />
             </div>
 
-            {/* Background Decor: Red Glows (Kept, but on top of image/overlay) */}
-            {/* <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-red-600/20 blur-[100px] pointer-events-none z-0" />
-            <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-blue-600/10 blur-[100px] pointer-events-none z-0" /> */}
-
-            {/* Background Decor: Grid Pattern (Optional, can remove if looks busy) */}
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-soft-light pointer-events-none z-0"></div>
 
             <div className="relative z-10 flex flex-col items-center justify-center text-center">

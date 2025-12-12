@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import {
   FaBriefcase,
-  FaArrowDown,
   FaArrowRight,
   FaCheck,
   FaLightbulb,
@@ -18,10 +17,9 @@ import {
   FaMoneyBillWave,
   FaCoffee,
   FaGift,
+  FaEnvelope,
 } from "react-icons/fa";
-import CTASection from "@/components/CTASection";
 import Image from "next/image";
-import Link from "next/link";
 import CTASectionTwo from "../CTASectionTwo";
 
 // Icon mapping function
@@ -128,21 +126,14 @@ export default function CareersPage({ careersBlock, cta }: any) {
                 ))}
               </div>
             </div>
-
-            {/* <div className="flex items-center gap-4 text-white/60 text-xs font-mono uppercase tracking-widest">
-              <span>Scroll to Explore</span>
-              <FaArrowDown className="animate-bounce" />
-            </div> */}
           </div>
         </div>
       </section>
 
       {/* --- 2. Company Culture (Rounded Cards with Icons) --- */}
-      {/* UPDATED: py-24 -> py-10 */}
       <section className="relative w-full px-6 md:px-12 py-10 bg-white">
         <div className="max-w-screen-2xl mx-auto">
           {/* Section Header */}
-          {/* UPDATED: mb-16 -> mb-12 */}
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-zinc-200 pb-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">
@@ -163,7 +154,6 @@ export default function CareersPage({ careersBlock, cta }: any) {
               >
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-2xl bg-white border border-zinc-200 flex items-center justify-center mb-6 group-hover:border-red-600 transition-colors duration-300 shadow-sm">
-                    {/* Prioritize Icons over Images if desired, or keep image check for Culture section */}
                     {card.image?.url ? (
                       <Image
                         src={card.image.url}
@@ -194,10 +184,8 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 3. Job Openings (Clean List Layout) --- */}
-      {/* UPDATED: py-24 -> py-10 */}
       <section className="w-full px-6 md:px-12 py-10 bg-white">
         <div className="max-w-screen-xl mx-auto">
-          {/* UPDATED: mb-16 -> mb-12 */}
           <div className="text-center mb-12">
             <span className="text-red-600 font-mono text-xs uppercase tracking-widest mb-4 block">
               Join the Team
@@ -290,10 +278,29 @@ export default function CareersPage({ careersBlock, cta }: any) {
                       </div>
                     </div>
 
-                    {/* UPDATED: text-black -> text-red-600 to match brand outline style */}
-                    <button className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-red-600 border border-red-600 font-bold uppercase tracking-widest text-xs rounded-2xl hover:bg-red-600 hover:text-white cursor-pointer transition-colors duration-300 hover:shadow-red-600/20">
-                      Apply Now <FaArrowRight />
-                    </button>
+                    {/* --- UPDATED: Email & Button Section --- */}
+                    <div className="flex flex-col items-start gap-4">
+                      {/* 1. Main Button - using <a> tag for mailto */}
+                      <a
+                        href="mailto:birthgiverfilmproductions@gmail.com"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-red-600 border border-red-600 font-bold uppercase tracking-widest text-xs rounded-2xl hover:bg-red-600 hover:text-white cursor-pointer transition-colors duration-300 hover:shadow-lg hover:shadow-red-600/20"
+                      >
+                        Apply Now <FaArrowRight />
+                      </a>
+
+                      {/* 2. Text fallback for email */}
+                      <div className="flex items-center gap-2 text-sm text-zinc-500 font-medium">
+                        <FaEnvelope className="text-zinc-400" />
+                        <span>Or send your CV to: </span>
+                        <a
+                          href="mailto:birthgiverfilmproductions@gmail.com"
+                          className="text-red-600 hover:underline transition-colors"
+                        >
+                          birthgiverfilmproductions@gmail.com
+                        </a>
+                      </div>
+                    </div>
+                    {/* --------------------------------------- */}
                   </div>
                 </div>
               </motion.div>
@@ -303,10 +310,8 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 4. Perks & Benefits (Rounded Grid with Icons) --- */}
-      {/* UPDATED: py-24 -> py-10 */}
       <section className="relative w-full px-6 md:px-12 py-10 bg-zinc-50 border-t border-zinc-100">
         <div className="max-w-screen-2xl mx-auto">
-          {/* UPDATED: mb-16 -> mb-12 */}
           <div className="mb-12">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
               {careersBlock?.gain?.title || "Why Join Us?"}
@@ -324,7 +329,6 @@ export default function CareersPage({ careersBlock, cta }: any) {
               >
                 <div className="mb-auto">
                   <div className="w-12 h-12 bg-zinc-50 rounded-xl flex items-center justify-center mb-6 text-zinc-900 group-hover:text-red-600 transition-colors">
-                    {/* UPDATED: Removed check for card.image.url to force new icons */}
                     {getIconForCard(index, "perk")}
                   </div>
                 </div>
@@ -338,10 +342,8 @@ export default function CareersPage({ careersBlock, cta }: any) {
       </section>
 
       {/* --- 5. Application Process (Numbered Grid) --- */}
-      {/* UPDATED: py-24 -> py-10 */}
       <section className="w-full px-6 md:px-12 py-10 bg-zinc-900 text-white">
         <div className="max-w-screen-2xl mx-auto">
-          {/* UPDATED: mb-16 -> mb-12 */}
           <div className="mb-12 border-b border-white/10 pb-8">
             <h2 className="text-4xl font-bold mb-4">
               {careersBlock?.apply?.title || "How It Works"}
