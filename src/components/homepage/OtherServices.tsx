@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   BsCameraVideo,
@@ -15,6 +15,7 @@ import {
   BsEnvelope,
   BsGeoAlt,
 } from "react-icons/bs";
+import { FaArrowRight, FaTimes } from "react-icons/fa"; // Imported for the new Quote Form
 import Link from "next/link";
 import Image from "next/image";
 
@@ -28,7 +29,7 @@ const ICON_MAP: { [key: string]: React.ReactNode } = {
   "Digital Content Creation": <BsPhone className="w-6 h-6" />,
 };
 
-// --- Updated Contact Modal ---
+// --- Updated Contact Modal (Existing) ---
 const ContactModal = ({
   isOpen,
   onClose,
@@ -44,7 +45,7 @@ const ContactModal = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 p-4"
+        className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-[9999] p-4"
         onClick={onClose}
       >
         <motion.div
@@ -55,7 +56,7 @@ const ContactModal = ({
           className="bg-white rounded-3xl p-8 max-w-md w-full relative shadow-2xl overflow-hidden text-center"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Close Button - Z-Index increased to 50 to ensure clickability */}
+          {/* Close Button */}
           <button
             type="button"
             onClick={onClose}
@@ -135,6 +136,146 @@ const ContactModal = ({
   </AnimatePresence>
 );
 
+// --- New Quote Form Modal (From Film Page) ---
+const QuoteFormModal = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
+  // Lock body scroll when open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
+      <div
+        className="absolute inset-0 bg-zinc-900/90 backdrop-blur-sm transition-opacity"
+        onClick={onClose}
+      />
+
+      <div className="relative bg-white w-full max-w-lg rounded-3xl p-8 md:p-10 shadow-2xl animate-in fade-in zoom-in duration-300 max-h-[90vh] overflow-y-auto no-scrollbar">
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 text-zinc-400 hover:text-red-600 transition-colors"
+        >
+          <FaTimes size={24} />
+        </button>
+
+        <div className="mb-8">
+          <span className="text-red-600 font-mono text-xs font-bold uppercase tracking-widest mb-2 block">
+            Get in Touch
+          </span>
+          <h3 className="text-3xl font-bold text-zinc-900">
+            Start Your Project
+          </h3>
+        </div>
+
+        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+          <div>
+            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="hello@company.com"
+              className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">
+              Phone (Optional)
+            </label>
+            <input
+              type="tel"
+              placeholder="Your Phone Number"
+              className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">
+              Inquiry Type
+            </label>
+            <div className="relative">
+              <select
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all appearance-none cursor-pointer"
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  Select an Option
+                </option>
+                <option value="Software Development">
+                  Software Development
+                </option>
+                <option value="Film Production">Film Production</option>
+                <option value="Marketing">Marketing</option>
+              </select>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold uppercase text-zinc-500 mb-2">
+              Project Details
+            </label>
+            <textarea
+              rows={4}
+              placeholder="Tell us about your project..."
+              className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-zinc-900 focus:outline-none focus:border-red-600 focus:ring-1 focus:ring-red-600 transition-all resize-none"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className="group/submit flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all duration-300 mt-4 bg-transparent border border-red-600 text-red-600 hover:bg-red-600 hover:text-white hover:shadow-lg hover:-translate-y-1"
+          >
+            <span>Send Request</span>
+            <FaArrowRight className="transition-transform duration-300 group-hover/submit:translate-x-1" />
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
 // Service Card
 const ServiceCard = ({ service }: { service: any }) => (
   <Link
@@ -174,7 +315,10 @@ const ServiceCard = ({ service }: { service: any }) => (
 
 // --- Main Component ---
 export default function OtherServices({ data, readyData }: any) {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // 'contact' for the existing modal, 'quote' for the form form from film page
+  const [activeModal, setActiveModal] = useState<"contact" | "quote" | null>(
+    null
+  );
 
   // 1. Prepare Data
   const services =
@@ -195,10 +339,17 @@ export default function OtherServices({ data, readyData }: any) {
 
   return (
     <>
+      {/* Existing Contact Modal */}
       <ContactModal
-        isOpen={isPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
+        isOpen={activeModal === "contact"}
+        onClose={() => setActiveModal(null)}
         data={readyData}
+      />
+
+      {/* New Quote Form Modal */}
+      <QuoteFormModal
+        isOpen={activeModal === "quote"}
+        onClose={() => setActiveModal(null)}
       />
 
       <div className="w-full py-10 bg-linear-to-br from-gray-50 to-white overflow-hidden">
@@ -287,9 +438,9 @@ export default function OtherServices({ data, readyData }: any) {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                {/* Primary Button */}
+                {/* Primary Button -> Opens Quote Modal (Form) */}
                 <button
-                  onClick={() => setIsPopupOpen(true)}
+                  onClick={() => setActiveModal("quote")}
                   className="group relative inline-flex items-center justify-center bg-transparent text-white border border-red-600 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-red-600 hover:text-white hover:border-red-600 hover:shadow-[0_0_20px_rgba(220,38,38,0.5)] cursor-pointer hover:-translate-y-1"
                 >
                   <span className="mr-2">
@@ -298,9 +449,9 @@ export default function OtherServices({ data, readyData }: any) {
                   <BsArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
 
-                {/* Secondary Button */}
+                {/* Secondary Button -> Opens Contact Modal (Info) */}
                 <button
-                  onClick={() => setIsPopupOpen(true)}
+                  onClick={() => setActiveModal("contact")}
                   className="group inline-flex items-center justify-center bg-transparent border border-white/50 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-black cursor-pointer hover:border-white/40"
                 >
                   <BsTelephone className="w-5 h-5 mr-2 text-gray-400 group-hover:text-black transition-colors" />
