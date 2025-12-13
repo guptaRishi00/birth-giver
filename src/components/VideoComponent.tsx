@@ -7,7 +7,7 @@ type Props = {
 
 export default function VideoComponent({ url, poster }: Props) {
   return (
-    <div className="">
+    <div className="object-cover w-full h-full">
       <video
         autoPlay
         loop

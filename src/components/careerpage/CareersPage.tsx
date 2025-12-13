@@ -289,12 +289,12 @@ export default function CareersPage({ careersBlock, cta }: any) {
                       </a>
 
                       {/* 2. Text fallback for email */}
-                      <div className="flex items-center gap-2 text-sm text-zinc-500 font-medium">
-                        <FaEnvelope className="text-zinc-400" />
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-zinc-500 font-medium">
+                        <FaEnvelope className="text-zinc-400 shrink-0" />
                         <span>Or send your CV to: </span>
                         <a
                           href="mailto:birthgiverfilmproductions@gmail.com"
-                          className="text-red-600 hover:underline transition-colors"
+                          className="text-red-600 hover:underline transition-colors break-all"
                         >
                           birthgiverfilmproductions@gmail.com
                         </a>

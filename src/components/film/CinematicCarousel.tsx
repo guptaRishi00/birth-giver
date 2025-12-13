@@ -168,13 +168,13 @@ export default function CinematicCarousel({ projects }: { projects: any[] }) {
         </Carousel>
 
         {/* Circle Sliders (Dots) */}
-        <div className="flex justify-center items-center gap-4 mt-8 md:mt-12">
+        <div className="flex justify-center items-center gap-2 lg:gap-4 mt-8 md:mt-12">
           {Array.from({ length: count }).map((_, index) => (
             <button
               key={index}
               onClick={() => api?.scrollTo(index)}
               className={cn(
-                "h-2 w-2 rounded-full transition-all duration-500 cursor-pointer",
+                "lg:h-2 lg:w-2 w-1 h-1 rounded-full transition-all duration-500 cursor-pointer",
                 current === index
                   ? "bg-zinc-900 "
                   : "bg-zinc-300 hover:bg-zinc-400"

@@ -110,7 +110,7 @@ export default async function SoftwareDevelopmentPage() {
             </span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tighter mb-8 text-white max-w-6xl">
+          <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.9] tracking-tighter mb-8 text-white max-w-6xl">
             {heroTitle}
           </h1>
 
