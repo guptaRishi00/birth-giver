@@ -10,7 +10,8 @@ import { DM_Sans } from "next/font/google";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  display: "swap",
+  display: "swap", // <--- Add this line
+  variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {

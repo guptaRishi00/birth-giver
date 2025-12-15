@@ -18,7 +18,7 @@ export default function HeroSection({ data }: any) {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 1, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
