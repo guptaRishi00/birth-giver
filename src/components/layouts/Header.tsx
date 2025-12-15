@@ -156,7 +156,7 @@ export default function Header({ data }: HeaderProps) {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 15 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-1/2 -translate-x-1/2 top-full pt-6 w-64"
+                    className="absolute left-1/2 -translate-x-1/2 top-full pt-6 w-64 z-20"
                   >
                     <div className="bg-neutral-900 border border-white/10 rounded-xl p-2 shadow-2xl overflow-hidden backdrop-blur-md">
                       {link.children.map((child) => (

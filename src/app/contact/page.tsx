@@ -83,7 +83,7 @@ export default function ContactPage({ cta }: { cta: any }) {
                 href="mailto:birthgiverfilmproductions@gmail.com"
                 className="block text-xl md:text-3xl font-bold hover:text-red-600 transition-colors duration-300 break-all leading-tight"
               >
-                birthgiverfilmproductions@gmail.com
+                bgfp@birthgiverfilmproduction.com
               </Link>
             </div>
 

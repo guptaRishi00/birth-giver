@@ -45,7 +45,7 @@ export default async function RootLayout({
           `}
         </Script>
         {/* --- END OF GOOGLE TAGS --- */}
-        <div className="overflow-x-hidden">
+        <div className="overflow-x-hidden lg:overflow-x-visible">
           <Header data={headerData} />
         </div>
         {children}

@@ -159,7 +159,7 @@ export default function IntroSection({ data }: any) {
                 transition={{ duration: 0.6 }}
               >
                 <Image
-                  src="/rightimage.jpg" // Using the local image from public folder
+                  src="/rightimage2.jpg" // Using the local image from public folder
                   alt={data?.title || "Intro section image"}
                   fill
                   priority // Loads image faster since it's above the fold

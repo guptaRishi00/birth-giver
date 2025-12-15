@@ -296,7 +296,7 @@ export default function CareersPage({ careersBlock, cta }: any) {
                           href="mailto:birthgiverfilmproductions@gmail.com"
                           className="text-red-600 hover:underline transition-colors break-all"
                         >
-                          birthgiverfilmproductions@gmail.com
+                          bgfp@birthgiverfilmproduction.com
                         </a>
                       </div>
                     </div>
